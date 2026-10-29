@@ -1,0 +1,1336 @@
+{
+ "total": {
+  "verified": 66,
+  "check_yourself": 0,
+  "shown": 56,
+  "wrong_shown": 0,
+  "wrong_held_back": 0,
+  "letters": 12,
+  "errors": 0,
+  "cost_usd": 0.5157
+ },
+ "letters": [
+  {
+   "id": "bank-001",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.04,
+   "seconds": 15.4,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1386
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1330
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1714
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1718
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1450, 447): 216 characters",
+     "ms": 2420,
+     "tokens": {
+      "in": 931,
+      "out": 367,
+      "reasoning": 291
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "944 characters read",
+     "ms": 2818,
+     "tokens": {
+      "in": 2155,
+      "out": 564,
+      "reasoning": 293
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 690, 1450, 1137): 456 characters",
+     "ms": 3712,
+     "tokens": {
+      "in": 931,
+      "out": 597,
+      "reasoning": 473
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 311, 1450, 826): 758 characters",
+     "ms": 3772,
+     "tokens": {
+      "in": 1084,
+      "out": 532,
+      "reasoning": 316
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 11149,
+     "tokens": {
+      "in": 784,
+      "out": 3278,
+      "reasoning": 2865
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 6,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "bank-005",
+   "language": "hi",
+   "verified": 7,
+   "check_yourself": 0,
+   "shown": 7,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0451,
+   "seconds": 20.3,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1200
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1424
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1487
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1809
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 302, 1452, 803): 729 characters",
+     "ms": 2465,
+     "tokens": {
+      "in": 1103,
+      "out": 453,
+      "reasoning": 242
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "906 characters read",
+     "ms": 3297,
+     "tokens": {
+      "in": 2104,
+      "out": 689,
+      "reasoning": 424
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1452, 435): 205 characters",
+     "ms": 4500,
+     "tokens": {
+      "in": 947,
+      "out": 654,
+      "reasoning": 577
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 670, 1452, 1105): 413 characters",
+     "ms": 4703,
+     "tokens": {
+      "in": 947,
+      "out": 823,
+      "reasoning": 712
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "7 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 15719,
+     "tokens": {
+      "in": 778,
+      "out": 3908,
+      "reasoning": 2714
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "7 verified, 0 failed",
+     "ms": 8,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "bank-009",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0396,
+   "seconds": 18.6,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1564
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1409
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1403, 437): 219 characters",
+     "ms": 1966,
+     "tokens": {
+      "in": 915,
+      "out": 176,
+      "reasoning": 98
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 2530
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1403, 1112): 379 characters",
+     "ms": 2519,
+     "tokens": {
+      "in": 915,
+      "out": 393,
+      "reasoning": 295
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 2609
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "947 characters read",
+     "ms": 3016,
+     "tokens": {
+      "in": 2115,
+      "out": 562,
+      "reasoning": 293
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1403, 808): 710 characters",
+     "ms": 3122,
+     "tokens": {
+      "in": 1065,
+      "out": 683,
+      "reasoning": 479
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in English",
+     "ms": 13927,
+     "tokens": {
+      "in": 746,
+      "out": 3451,
+      "reasoning": 3114
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 5,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-000",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0424,
+   "seconds": 14.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1717
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 1494
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 1 found",
+     "ms": 1500
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1620
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 678, 1408, 1117): 483 characters",
+     "ms": 2317,
+     "tokens": {
+      "in": 915,
+      "out": 509,
+      "reasoning": 375
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (97, 392, 1312, 702): 156 characters",
+     "ms": 1381,
+     "tokens": {
+      "in": 765,
+      "out": 157,
+      "reasoning": 87
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "897 characters read",
+     "ms": 3475,
+     "tokens": {
+      "in": 2115,
+      "out": 730,
+      "reasoning": 461
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "rectangle at (95, 715, 1310, 827): 114 characters",
+     "ms": 1925,
+     "tokens": {
+      "in": 365,
+      "out": 134,
+      "reasoning": 86
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 305, 1408, 812): 399 characters",
+     "ms": 4400,
+     "tokens": {
+      "in": 1065,
+      "out": 1051,
+      "reasoning": 902
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1408, 439): 304 characters",
+     "ms": 5359,
+     "tokens": {
+      "in": 915,
+      "out": 852,
+      "reasoning": 753
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 8873,
+     "tokens": {
+      "in": 782,
+      "out": 2162,
+      "reasoning": 1831
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 7,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-004",
+   "language": "hi",
+   "verified": 6,
+   "check_yourself": 0,
+   "shown": 6,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0424,
+   "seconds": 15.3,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1175
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 1212
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1333
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 1 found",
+     "ms": 1433
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 681, 1411, 1122): 483 characters",
+     "ms": 2596,
+     "tokens": {
+      "in": 915,
+      "out": 402,
+      "reasoning": 268
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (97, 393, 1313, 706): 156 characters",
+     "ms": 1395,
+     "tokens": {
+      "in": 765,
+      "out": 186,
+      "reasoning": 116
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "886 characters read",
+     "ms": 3722,
+     "tokens": {
+      "in": 2115,
+      "out": 830,
+      "reasoning": 562
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "rectangle at (100, 716, 1315, 831): 114 characters",
+     "ms": 2301,
+     "tokens": {
+      "in": 365,
+      "out": 184,
+      "reasoning": 136
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1411, 441): 293 characters",
+     "ms": 4079,
+     "tokens": {
+      "in": 915,
+      "out": 487,
+      "reasoning": 389
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 306, 1411, 816): 386 characters",
+     "ms": 4422,
+     "tokens": {
+      "in": 1065,
+      "out": 788,
+      "reasoning": 641
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "6 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 10354,
+     "tokens": {
+      "in": 781,
+      "out": 2701,
+      "reasoning": 2314
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "6 verified, 0 failed",
+     "ms": 8,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-008",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0501,
+   "seconds": 14.9,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1665
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1199
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 1437
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 1 found",
+     "ms": 2254
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 693, 1445, 1142): 470 characters",
+     "ms": 2366,
+     "tokens": {
+      "in": 931,
+      "out": 396,
+      "reasoning": 268
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "909 characters read",
+     "ms": 4070,
+     "tokens": {
+      "in": 2247,
+      "out": 901,
+      "reasoning": 631
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "rectangle at (105, 694, 1322, 848): 193 characters",
+     "ms": 2554,
+     "tokens": {
+      "in": 465,
+      "out": 482,
+      "reasoning": 411
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 312, 1445, 830): 456 characters",
+     "ms": 4925,
+     "tokens": {
+      "in": 1084,
+      "out": 1016,
+      "reasoning": 852
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (113, 395, 1334, 724): 223 characters",
+     "ms": 2933,
+     "tokens": {
+      "in": 815,
+      "out": 575,
+      "reasoning": 482
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1445, 449): 316 characters",
+     "ms": 6734,
+     "tokens": {
+      "in": 931,
+      "out": 1088,
+      "reasoning": 982
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in English",
+     "ms": 9071,
+     "tokens": {
+      "in": 747,
+      "out": 2859,
+      "reasoning": 2553
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 13,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "ptax-003",
+   "language": "bn",
+   "verified": 7,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0464,
+   "seconds": 21.2,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1244
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1013
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1094
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1436, 382): 114 characters",
+     "ms": 1634,
+     "tokens": {
+      "in": 829,
+      "out": 154,
+      "reasoning": 95
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 1 found",
+     "ms": 2238
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 589, 1436, 971): 294 characters",
+     "ms": 2263,
+     "tokens": {
+      "in": 829,
+      "out": 414,
+      "reasoning": 313
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 265, 1436, 706): 517 characters",
+     "ms": 2788,
+     "tokens": {
+      "in": 999,
+      "out": 725,
+      "reasoning": 531
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "rectangle at (19, 14, 1417, 957): 665 characters",
+     "ms": 2380,
+     "tokens": {
+      "in": 1935,
+      "out": 536,
+      "reasoning": 289
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "665 characters read",
+     "ms": 5915,
+     "tokens": {
+      "in": 1935,
+      "out": 899,
+      "reasoning": 652
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "7 points in Bengali (বাংলা, Bengali script)",
+     "ms": 13935,
+     "tokens": {
+      "in": 760,
+      "out": 3705,
+      "reasoning": 3302
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "7 verified, 0 failed",
+     "ms": 21,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "ptax-007",
+   "language": "hi",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0414,
+   "seconds": 19.3,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 964
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1414
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1486
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1422, 375): 117 characters",
+     "ms": 1800,
+     "tokens": {
+      "in": 829,
+      "out": 211,
+      "reasoning": 152
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1982
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 578, 1422, 953): 298 characters",
+     "ms": 2145,
+     "tokens": {
+      "in": 829,
+      "out": 411,
+      "reasoning": 308
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "682 characters read",
+     "ms": 3088,
+     "tokens": {
+      "in": 1849,
+      "out": 552,
+      "reasoning": 300
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 260, 1422, 693): 534 characters",
+     "ms": 3142,
+     "tokens": {
+      "in": 915,
+      "out": 798,
+      "reasoning": 599
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 15228,
+     "tokens": {
+      "in": 765,
+      "out": 3896,
+      "reasoning": 3591
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 6,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "ptax-011",
+   "language": "en",
+   "verified": 7,
+   "check_yourself": 0,
+   "shown": 6,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0418,
+   "seconds": 22.6,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1620
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1316
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1876
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "674 characters read",
+     "ms": 2578,
+     "tokens": {
+      "in": 1900,
+      "out": 526,
+      "reasoning": 275
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 268, 1445, 715): 469 characters",
+     "ms": 2800,
+     "tokens": {
+      "in": 999,
+      "out": 400,
+      "reasoning": 220
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1445, 387): 103 characters",
+     "ms": 2866,
+     "tokens": {
+      "in": 829,
+      "out": 356,
+      "reasoning": 299
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 3025
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 596, 1445, 983): 344 characters",
+     "ms": 3677,
+     "tokens": {
+      "in": 829,
+      "out": 812,
+      "reasoning": 689
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "7 points in English",
+     "ms": 17902,
+     "tokens": {
+      "in": 728,
+      "out": 3840,
+      "reasoning": 2657
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "7 verified, 0 failed",
+     "ms": 8,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-002",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0481,
+   "seconds": 21.9,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1772
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 1175
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1305
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1661
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1473, 499): 224 characters",
+     "ms": 2273,
+     "tokens": {
+      "in": 1051,
+      "out": 319,
+      "reasoning": 230
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1473, 922): 571 characters",
+     "ms": 2737,
+     "tokens": {
+      "in": 1281,
+      "out": 547,
+      "reasoning": 366
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 769, 1473, 1268): 466 characters",
+     "ms": 3071,
+     "tokens": {
+      "in": 1051,
+      "out": 609,
+      "reasoning": 476
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "876 characters read",
+     "ms": 3274,
+     "tokens": {
+      "in": 2455,
+      "out": 652,
+      "reasoning": 392
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (118, 650, 1338, 869): 188 characters",
+     "ms": 4374,
+     "tokens": {
+      "in": 565,
+      "out": 1003,
+      "reasoning": 940
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 16760,
+     "tokens": {
+      "in": 773,
+      "out": 3717,
+      "reasoning": 3402
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 6,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-006",
+   "language": "hi",
+   "verified": 4,
+   "check_yourself": 0,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0368,
+   "seconds": 12.9,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1042
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1439
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1427, 478): 226 characters",
+     "ms": 1711,
+     "tokens": {
+      "in": 1033,
+      "out": 198,
+      "reasoning": 108
+     }
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1874
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 2047
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 332, 1427, 884): 528 characters",
+     "ms": 2719,
+     "tokens": {
+      "in": 1186,
+      "out": 570,
+      "reasoning": 403
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 738, 1427, 1216): 462 characters",
+     "ms": 3026,
+     "tokens": {
+      "in": 1033,
+      "out": 573,
+      "reasoning": 445
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (108, 648, 1324, 819): 85 characters",
+     "ms": 1219,
+     "tokens": {
+      "in": 465,
+      "out": 151,
+      "reasoning": 110
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "881 characters read",
+     "ms": 3686,
+     "tokens": {
+      "in": 2308,
+      "out": 571,
+      "reasoning": 308
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 8116,
+     "tokens": {
+      "in": 776,
+      "out": 2240,
+      "reasoning": 1953
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 0 failed",
+     "ms": 9,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-010",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0416,
+   "seconds": 12.8,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 1 found, cropped to it",
+     "ms": 1164
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1159
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 1 found",
+     "ms": 1431
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 2079
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1439, 483): 232 characters",
+     "ms": 2297,
+     "tokens": {
+      "in": 1051,
+      "out": 195,
+      "reasoning": 105
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "881 characters read",
+     "ms": 3379,
+     "tokens": {
+      "in": 2403,
+      "out": 656,
+      "reasoning": 395
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 335, 1439, 892): 546 characters",
+     "ms": 3820,
+     "tokens": {
+      "in": 1186,
+      "out": 641,
+      "reasoning": 466
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 744, 1439, 1227): 461 characters",
+     "ms": 4706,
+     "tokens": {
+      "in": 1051,
+      "out": 757,
+      "reasoning": 625
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "table at (107, 650, 1323, 829): 115 characters",
+     "ms": 2919,
+     "tokens": {
+      "in": 515,
+      "out": 641,
+      "reasoning": 594
+     }
+    },
+    {
+     "step": "explain",
+     "model": "muse-spark-1.3",
+     "detail": "5 points in English",
+     "ms": 8167,
+     "tokens": {
+      "in": 738,
+      "out": 2503,
+      "reasoning": 2221
+     }
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 6,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  }
+ ]
+}

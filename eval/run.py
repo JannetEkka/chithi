@@ -47,10 +47,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", choices=["mock", "live", "live-open"], default="mock")
     ap.add_argument("--n", type=int, default=40)
+    ap.add_argument("--per-kind", type=int, default=0, help="take this many letters of each kind instead of the first --n")
     ap.add_argument("--no-repair", action="store_true")
     args = ap.parse_args()
 
-    letters = sorted((ROOT / "letters" / "out").glob("*.json"))[: args.n]
+    letters = sorted((ROOT / "letters" / "out").glob("*.json"))
+    if args.per_kind:
+        kinds: dict[str, int] = {}
+        picked = []
+        for p in letters:
+            k = p.stem.split("-")[0]
+            if kinds.get(k, 0) < args.per_kind:
+                kinds[k] = kinds.get(k, 0) + 1
+                picked.append(p)
+        letters = picked
+    else:
+        letters = letters[: args.n]
     rows = []
     for i, path in enumerate(letters):
         truth = json.loads(path.read_text())
@@ -69,6 +81,9 @@ def main():
             continue
         row = score(res, truth)
         row["seconds"] = round(time.time() - t, 1)
+        row["trace"] = res.trace
+        row["verified_points"] = [{"say": p["say"], "evidence": p["evidence"], "topic": p["topic"]} for p in res.verified]
+        row["check_yourself_points"] = [{"say": p["say"], "quote": p["quote"], "reasons": p["reasons"]} for p in res.check_yourself]
         rows.append(row)
         print(f"{row['id']} {lang}: {row['verified']} verified, {row['check_yourself']} held back, "
               f"{row['wrong_shown']} wrong shown of {row['shown']}")
@@ -76,7 +91,7 @@ def main():
     ok = [r for r in rows if "error" not in r]
     total = {k: sum(r[k] for r in ok) for k in ["verified", "check_yourself", "shown", "wrong_shown", "wrong_held_back"]}
     total.update(letters=len(rows), errors=len(rows) - len(ok), cost_usd=round(sum(r["cost_usd"] for r in ok), 4))
-    out = ROOT / "eval" / f"results-{args.backend}{'-norepair' if args.no_repair else ''}.json"
+    out = ROOT / "eval" / f"results-{args.backend}{'-norepair' if args.no_repair else ''}-{len(rows)}.json"
     out.write_text(json.dumps({"total": total, "letters": rows}, ensure_ascii=False, indent=1))
     pts = total["verified"] + total["check_yourself"]
     print(f"\n| letters | points | verified | held back | values shown | wrong values shown | wrong values held back | cost |")

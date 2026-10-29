@@ -29,6 +29,9 @@ app.mount("/static", StaticFiles(directory=WEB), name="static")
 app.mount("/samples", StaticFiles(directory=SAMPLES), name="samples")
 
 _used: dict[str, list[float]] = defaultdict(list)
+# Sample letters give the same answer every time; run each one live once per
+# language and keep the result, so trying the samples costs nothing after that.
+_sample_cache: dict[tuple[str, str], dict] = {}
 
 
 def _spend(request: Request) -> None:
@@ -95,6 +98,8 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     else:
         raise HTTPException(400, "Send a photo or pick a sample letter")
 
+    if live() and sample_id and (sample_id, language) in _sample_cache:
+        return {**_sample_cache[(sample_id, language)], "cached": True}
     if live():
         _spend(request)
         backend = agent.LiveBackend(_explainer())
@@ -108,6 +113,8 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
         raise HTTPException(502, f"A Meta model call failed: {e}") from e
     out = res.to_dict()
     out["backend"] = backend.name
+    if sample_id and backend.name == "live":
+        _sample_cache[(sample_id, language)] = out
     return out
 
 

@@ -1,0 +1,3799 @@
+{
+ "total": {
+  "verified": 147,
+  "check_yourself": 53,
+  "shown": 147,
+  "wrong_shown": 0,
+  "wrong_held_back": 53,
+  "letters": 40,
+  "errors": 0,
+  "cost_usd": 0.0
+ },
+ "letters": [
+  {
+   "id": "bank-001",
+   "language": "bn",
+   "verified": 6,
+   "check_yourself": 0,
+   "shown": 6,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "954 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 954 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 954 characters",
+     "ms": 11
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 954 characters",
+     "ms": 15
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "6 verified, 0 failed",
+     "ms": 15,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "bank-005",
+   "language": "hi",
+   "verified": 2,
+   "check_yourself": 4,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 4,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "916 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 484): 916 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 336, 1587, 894): 916 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 746, 1587, 1230): 916 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 4 failed",
+     "ms": 13,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:9,875.00"
+       ]
+      },
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:9,758.00"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:24/10/2026"
+       ]
+      },
+      {
+       "point": "p6",
+       "reasons": [
+        "date_not_in_quote:12/11/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "मासिक किस्त: ₹9,875.00",
+     "quote": "This is to inform you that 2 EMI(s) of ₹ 4,875.00 each in your above loan account are overdue since 13.08.2026. The total overdue amount is ₹ 9,750.00, and penal interest of ₹ 390.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:9,875.00"
+     ]
+    },
+    {
+     "say": "बकाया राशि: ₹9,758.00",
+     "quote": "This is to inform you that 2 EMI(s) of ₹ 4,875.00 each in your above loan account are overdue since 13.08.2026. The total overdue amount is ₹ 9,750.00, and penal interest of ₹ 390.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:9,758.00"
+     ]
+    },
+    {
+     "say": "भुगतान की अंतिम तिथि: 24/10/2026",
+     "quote": "You are requested to pay ₹ 10,140.00 on or before 23.10.2026 to regularise the account.",
+     "reasons": [
+      "date_not_in_quote:24/10/2026"
+     ]
+    },
+    {
+     "say": "ऋण एनपीए घोषित होगा: 12/11/2026",
+     "quote": "Please note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 11.11.2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
+     "reasons": [
+      "date_not_in_quote:12/11/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-009",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 1,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "957 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 957 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 957 characters",
+     "ms": 9
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 957 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 1 failed",
+     "ms": 23,
+     "failures": [
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:722"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Penalty interest: ₹722",
+     "quote": "This is to inform you that 1 EMI(s) of Rs. 6,120/- each in your above loan account are overdue since 12th September 2026. The total overdue amount is Rs. 6,120/-, and penal interest of Rs. 122/- has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:722"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-013",
+   "language": "bn",
+   "verified": 3,
+   "check_yourself": 3,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 3,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "914 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 914 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 914 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 914 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 3 failed",
+     "ms": 11,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:6,120.30"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:10/10/2026"
+       ]
+      },
+      {
+       "point": "p6",
+       "reasons": [
+        "date_not_in_quote:04/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "মাসিক কিস্তি: ₹6,120.30",
+     "quote": "This is to inform you that 2 EMI(s) of Rs. 6,120.00 each in your above loan account are overdue since 02.08.2026. The total overdue amount is Rs. 12,240.00, and penal interest of Rs. 490.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:6,120.30"
+     ]
+    },
+    {
+     "say": "শেষ তারিখ: 10/10/2026",
+     "quote": "You are requested to pay Rs. 12,730.00 on or before 09.10.2026 to regularise the account.",
+     "reasons": [
+      "date_not_in_quote:10/10/2026"
+     ]
+    },
+    {
+     "say": "ঋণ অনাদায়ী ঘোষণা হবে: 04/10/2026",
+     "quote": "Please note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 31.10.2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
+     "reasons": [
+      "date_not_in_quote:04/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-017",
+   "language": "hi",
+   "verified": 4,
+   "check_yourself": 2,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "932 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 932 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 932 characters",
+     "ms": 8
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 932 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 2 failed",
+     "ms": 11,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:3,120"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:190"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "मासिक किस्त: ₹3,120",
+     "quote": "This is to inform you that 2 EMI(s) of Rs. 6,120/- each in your above loan account are overdue since 30.07.2026. The total overdue amount is Rs. 12,240/-, and penal interest of Rs. 490/- has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:3,120"
+     ]
+    },
+    {
+     "say": "दंड ब्याज: ₹190",
+     "quote": "This is to inform you that 2 EMI(s) of Rs. 6,120/- each in your above loan account are overdue since 30.07.2026. The total overdue amount is Rs. 12,240/-, and penal interest of Rs. 490/- has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:190"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-021",
+   "language": "en",
+   "verified": 6,
+   "check_yourself": 0,
+   "shown": 6,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "929 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 929 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 929 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 929 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "6 verified, 0 failed",
+     "ms": 11,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "bank-025",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 1,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "919 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 919 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 919 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 919 characters",
+     "ms": 9
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 1 failed",
+     "ms": 12,
+     "failures": [
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:26/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "শেষ তারিখ: 26/10/2026",
+     "quote": "You are requested to pay ₹ 18,718.00 on or before 25/10/2026 to regularise the account.",
+     "reasons": [
+      "date_not_in_quote:26/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-029",
+   "language": "hi",
+   "verified": 3,
+   "check_yourself": 3,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 3,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "957 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 957 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 957 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 957 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 3 failed",
+     "ms": 24,
+     "failures": [
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:24,900.10"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:996.02"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:27/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "बकाया राशि: ₹24,900.10",
+     "quote": "This is to inform you that 2 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 11th August 2026. The total overdue amount is ₹ 24,900.00, and penal interest of ₹ 996.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:24,900.10"
+     ]
+    },
+    {
+     "say": "दंड ब्याज: ₹996.02",
+     "quote": "This is to inform you that 2 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 11th August 2026. The total overdue amount is ₹ 24,900.00, and penal interest of ₹ 996.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:996.02"
+     ]
+    },
+    {
+     "say": "भुगतान की अंतिम तिथि: 27/10/2026",
+     "quote": "You are requested to pay ₹ 25,896.00 on or before 26th October 2026 to regularise the account.",
+     "reasons": [
+      "date_not_in_quote:27/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-033",
+   "language": "en",
+   "verified": 2,
+   "check_yourself": 4,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 4,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "917 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 917 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 917 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 917 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 4 failed",
+     "ms": 11,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:12,480.00"
+       ]
+      },
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:32,450.00"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:249.04"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:26/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Monthly instalment: ₹12,480.00",
+     "quote": "This is to inform you that 1 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 09.09.2026. The total overdue amount is ₹ 12,450.00, and penal interest of ₹ 249.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:12,480.00"
+     ]
+    },
+    {
+     "say": "Overdue amount: ₹32,450.00",
+     "quote": "This is to inform you that 1 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 09.09.2026. The total overdue amount is ₹ 12,450.00, and penal interest of ₹ 249.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:32,450.00"
+     ]
+    },
+    {
+     "say": "Penalty interest: ₹249.04",
+     "quote": "This is to inform you that 1 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 09.09.2026. The total overdue amount is ₹ 12,450.00, and penal interest of ₹ 249.00 has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:249.04"
+     ]
+    },
+    {
+     "say": "Pay by: 26/10/2026",
+     "quote": "You are requested to pay ₹ 12,699.00 on or before 25.10.2026 to regularise the account.",
+     "reasons": [
+      "date_not_in_quote:26/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bank-037",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 1,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "936 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "6 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 497): 936 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 346, 1587, 919): 936 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 768, 1587, 1265): 936 characters",
+     "ms": 9
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 1 failed",
+     "ms": 11,
+     "failures": [
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:997"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "জরিমানা সুদ: ₹997",
+     "quote": "This is to inform you that 2 EMI(s) of Rs. 12,450/- each in your above loan account are overdue since 8th August 2026. The total overdue amount is Rs. 24,900/-, and penal interest of Rs. 996/- has been levied as per the sanction terms.",
+     "reasons": [
+      "number_not_in_quote:997"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-000",
+   "language": "hi",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "888 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 888 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 888 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 888 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "number_not_in_quote:78.63"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "विलंब शुल्क: ₹78.63",
+     "quote": "Amount payable after due date: ₹ 4,012.52 (includes late payment surcharge of ₹ 78.68)",
+     "reasons": [
+      "number_not_in_quote:78.63"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-004",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "877 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 877 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 877 characters",
+     "ms": 8
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 877 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 9,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-008",
+   "language": "bn",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "900 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 349, 1587, 929): 900 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 503): 900 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 775, 1587, 1278): 900 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "number_not_in_quote:13.15"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "দেরির জরিমানা: ₹13.15",
+     "quote": "Amount payable after due date: INR 2,710.52 (includes late payment surcharge of INR 53.15)",
+     "reasons": [
+      "number_not_in_quote:13.15"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-012",
+   "language": "hi",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "904 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 349, 1587, 929): 904 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 503): 904 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 775, 1587, 1278): 904 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:22/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "इसके बाद बिजली कट सकती है: 22/10/2026",
+     "quote": "If the bill remains unpaid, supply is liable to be disconnected after 21-10-2026 under the applicable supply code, without further notice. Reconnection charges will apply.",
+     "reasons": [
+      "date_not_in_quote:22/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-016",
+   "language": "en",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "886 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 886 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 886 characters",
+     "ms": 9
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 886 characters",
+     "ms": 12
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:1,392.43"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Amount to pay: ₹1,392.43",
+     "quote": "NET AMOUNT PAYABLE\t₹ 1,392.49",
+     "reasons": [
+      "number_not_in_quote:1,392.43"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-020",
+   "language": "bn",
+   "verified": 2,
+   "check_yourself": 3,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 3,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "888 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 888 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 888 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 888 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 3 failed",
+     "ms": 10,
+     "failures": [
+      {
+       "point": "p2",
+       "reasons": [
+        "date_not_in_quote:05/10/2026"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "number_not_in_quote:27.57"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:20/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "শেষ তারিখ: 05/10/2026",
+     "quote": "Pay by Due Date: 04-10-2026",
+     "reasons": [
+      "date_not_in_quote:05/10/2026"
+     ]
+    },
+    {
+     "say": "দেরির জরিমানা: ₹27.57",
+     "quote": "Amount payable after due date: ₹ 1,355.23 (includes late payment surcharge of ₹ 26.57)",
+     "reasons": [
+      "number_not_in_quote:27.57"
+     ]
+    },
+    {
+     "say": "এর পরে বিদ্যুৎ কাটা যেতে পারে: 20/10/2026",
+     "quote": "If the bill remains unpaid, supply is liable to be disconnected after 19-10-2026 under the applicable supply code, without further notice. Reconnection charges will apply.",
+     "reasons": [
+      "date_not_in_quote:20/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-024",
+   "language": "hi",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "907 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 365, 1587, 970): 907 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 810, 1587, 1335): 907 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 525): 907 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 9,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-028",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "884 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 356, 1587, 946): 884 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 512): 884 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 790, 1587, 1302): 884 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 10,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "elec-032",
+   "language": "bn",
+   "verified": 2,
+   "check_yourself": 3,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 3,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "903 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 503): 903 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 775, 1587, 1278): 903 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 349, 1587, 929): 903 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 3 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:2,125.58"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:2,166.01"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "number_not_in_quote:42.31"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "দিতে হবে: ₹2,125.58",
+     "quote": "NET AMOUNT PAYABLE\tINR 2,125.50",
+     "reasons": [
+      "number_not_in_quote:2,125.58"
+     ]
+    },
+    {
+     "say": "শেষ তারিখের পরে টাকা: ₹2,166.01",
+     "quote": "Amount payable after due date: INR 2,168.01 (includes late payment surcharge of INR 42.51)",
+     "reasons": [
+      "number_not_in_quote:2,166.01"
+     ]
+    },
+    {
+     "say": "দেরির জরিমানা: ₹42.31",
+     "quote": "Amount payable after due date: INR 2,168.01 (includes late payment surcharge of INR 42.51)",
+     "reasons": [
+      "number_not_in_quote:42.31"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "elec-036",
+   "language": "hi",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "903 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 503): 903 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 775, 1587, 1278): 903 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 349, 1587, 929): 903 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 10,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "ptax-003",
+   "language": "en",
+   "verified": 4,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "666 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 666 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 666 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 666 characters",
+     "ms": 7
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 0 failed",
+     "ms": 7,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "ptax-007",
+   "language": "bn",
+   "verified": 2,
+   "check_yourself": 2,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "683 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 683 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 683 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 683 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 2 failed",
+     "ms": 8,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:12,964.70"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:04/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "কর: ₹12,964.70",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹12,964.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹1,296.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹14,260.00 है।",
+     "reasons": [
+      "number_not_in_quote:12,964.70"
+     ]
+    },
+    {
+     "say": "শেষ তারিখ: 04/10/2026",
+     "quote": "कृपया कुल राशि का भुगतान 3 अक्टूबर 2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:04/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-011",
+   "language": "hi",
+   "verified": 2,
+   "check_yourself": 2,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "675 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 675 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 675 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 675 characters",
+     "ms": 9
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 2 failed",
+     "ms": 8,
+     "failures": [
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:9,318.00"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:74,493.00"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "विलंब शुल्क: ₹9,318.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹13,175.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹1,318.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹14,493.00 है।",
+     "reasons": [
+      "number_not_in_quote:9,318.00"
+     ]
+    },
+    {
+     "say": "देय राशि: ₹74,493.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹13,175.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹1,318.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹14,493.00 है।",
+     "reasons": [
+      "number_not_in_quote:74,493.00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-015",
+   "language": "en",
+   "verified": 3,
+   "check_yourself": 1,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "672 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 672 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 672 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 672 characters",
+     "ms": 8
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 1 failed",
+     "ms": 15,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:06/09/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Pay by: 06/09/2026",
+     "quote": "कृपया कुल राशि का भुगतान 05/09/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:06/09/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-019",
+   "language": "bn",
+   "verified": 2,
+   "check_yourself": 2,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "683 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 683 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 683 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 683 characters",
+     "ms": 7
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 2 failed",
+     "ms": 7,
+     "failures": [
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:16,377.00"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:04/11/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "দিতে হবে: ₹16,377.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹11,252.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹1,125.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹12,377.00 है।",
+     "reasons": [
+      "number_not_in_quote:16,377.00"
+     ]
+    },
+    {
+     "say": "শেষ তারিখ: 04/11/2026",
+     "quote": "कृपया कुल राशि का भुगतान 3 नवंबर 2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:04/11/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-023",
+   "language": "hi",
+   "verified": 3,
+   "check_yourself": 1,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "672 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 672 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 672 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 672 characters",
+     "ms": 7
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 1 failed",
+     "ms": 7,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:01/08/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "भुगतान की अंतिम तिथि: 01/08/2026",
+     "quote": "कृपया कुल राशि का भुगतान 28/08/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:01/08/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-027",
+   "language": "en",
+   "verified": 2,
+   "check_yourself": 2,
+   "shown": 2,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "669 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 669 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 669 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 669 characters",
+     "ms": 12
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "2 verified, 2 failed",
+     "ms": 7,
+     "failures": [
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:188.00"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:18/09/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Late fee: ₹188.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹1,175.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹118.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹1,293.00 है।",
+     "reasons": [
+      "number_not_in_quote:188.00"
+     ]
+    },
+    {
+     "say": "Pay by: 18/09/2026",
+     "quote": "कृपया कुल राशि का भुगतान 17/09/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:18/09/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-031",
+   "language": "bn",
+   "verified": 3,
+   "check_yourself": 1,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "677 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 677 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 677 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 677 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 1 failed",
+     "ms": 11,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:22/08/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "শেষ তারিখ: 22/08/2026",
+     "quote": "कृपया कुल राशि का भुगतान 21/08/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:22/08/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-035",
+   "language": "hi",
+   "verified": 0,
+   "check_yourself": 4,
+   "shown": 0,
+   "wrong_shown": 0,
+   "wrong_held_back": 4,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "662 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 662 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 662 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 662 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "0 verified, 4 failed",
+     "ms": 10,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:4,254.00"
+       ]
+      },
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:495.70"
+       ]
+      },
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:5,149.00"
+       ]
+      },
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:22/08/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "कर: ₹4,254.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹4,954.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹495.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹5,449.00 है।",
+     "reasons": [
+      "number_not_in_quote:4,254.00"
+     ]
+    },
+    {
+     "say": "विलंब शुल्क: ₹495.70",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹4,954.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹495.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹5,449.00 है।",
+     "reasons": [
+      "number_not_in_quote:495.70"
+     ]
+    },
+    {
+     "say": "देय राशि: ₹5,149.00",
+     "quote": "आपको सूचित किया जाता है कि वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹4,954.00 का संपत्ति कर बकाया है। देर से भुगतान के कारण ₹495.00 विलंब शुल्क जोड़ा गया है। कुल देय राशि ₹5,449.00 है।",
+     "reasons": [
+      "number_not_in_quote:5,149.00"
+     ]
+    },
+    {
+     "say": "भुगतान की अंतिम तिथि: 22/08/2026",
+     "quote": "कृपया कुल राशि का भुगतान 21/08/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें। निर्धारित तिथि तक भुगतान न करने पर नियमानुसार कुर्की की कार्यवाही की जा सकती है।",
+     "reasons": [
+      "date_not_in_quote:22/08/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ptax-039",
+   "language": "en",
+   "verified": 4,
+   "check_yourself": 0,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.0,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "678 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "4 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 438): 678 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 304, 1587, 809): 678 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 675, 1587, 1113): 678 characters",
+     "ms": 8
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 0 failed",
+     "ms": 13,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-002",
+   "language": "bn",
+   "verified": 3,
+   "check_yourself": 2,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.2,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "879 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 879 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 879 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 879 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 2 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p3",
+       "reasons": [
+        "number_not_in_quote:10,781.40"
+       ]
+      },
+      {
+       "point": "p5",
+       "reasons": [
+        "date_not_in_quote:27/10/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "দিতে হবে: ₹10,781.40",
+     "quote": "Total sum payable\tINR 10,781.00",
+     "reasons": [
+      "number_not_in_quote:10,781.40"
+     ]
+    },
+    {
+     "say": "আপত্তি থাকলে জবাব দিন: 27/10/2026",
+     "quote": "You are required to pay the above sum within 30 days of service of this notice, that is on or before 10-NOV-2026. If you disagree with this demand, you may submit your response with documents by 26-OCT-2026.",
+     "reasons": [
+      "date_not_in_quote:27/10/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tax-006",
+   "language": "hi",
+   "verified": 3,
+   "check_yourself": 2,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "884 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 884 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 884 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 884 characters",
+     "ms": 9
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 2 failed",
+     "ms": 8,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:20,237.00"
+       ]
+      },
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:7,521.00"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "कर: ₹20,237.00",
+     "quote": "Tax payable\tINR 50,237.00",
+     "reasons": [
+      "number_not_in_quote:20,237.00"
+     ]
+    },
+    {
+     "say": "ब्याज: ₹7,521.00",
+     "quote": "Interest\tINR 4,521.00",
+     "reasons": [
+      "number_not_in_quote:7,521.00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tax-010",
+   "language": "en",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "884 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 884 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 884 characters",
+     "ms": 9
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 884 characters",
+     "ms": 11
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 8,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:9,610.00"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Tax: ₹9,610.00",
+     "quote": "Tax payable\tINR 9,310.00",
+     "reasons": [
+      "number_not_in_quote:9,610.00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tax-014",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "873 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 873 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 873 characters",
+     "ms": 14
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 873 characters",
+     "ms": 12
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 9,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-018",
+   "language": "hi",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "887 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 887 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 887 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 887 characters",
+     "ms": 13
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 10,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-022",
+   "language": "en",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "883 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 883 characters",
+     "ms": 3
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 883 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 883 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 9,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-026",
+   "language": "bn",
+   "verified": 5,
+   "check_yourself": 0,
+   "shown": 5,
+   "wrong_shown": 0,
+   "wrong_held_back": 0,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "882 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 882 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 882 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 882 characters",
+     "ms": 13
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "5 verified, 0 failed",
+     "ms": 10,
+     "failures": []
+    }
+   ],
+   "check_yourself_points": []
+  },
+  {
+   "id": "tax-030",
+   "language": "hi",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "886 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 886 characters",
+     "ms": 5
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 886 characters",
+     "ms": 9
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 886 characters",
+     "ms": 12
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 9,
+     "failures": [
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:2,227.10"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "ब्याज: ₹2,227.10",
+     "quote": "Interest\tINR 2,227.00",
+     "reasons": [
+      "number_not_in_quote:2,227.10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tax-034",
+   "language": "en",
+   "verified": 4,
+   "check_yourself": 1,
+   "shown": 4,
+   "wrong_shown": 0,
+   "wrong_held_back": 1,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "891 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in English",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 891 characters",
+     "ms": 4
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 891 characters",
+     "ms": 10
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 891 characters",
+     "ms": 15
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "4 verified, 1 failed",
+     "ms": 19,
+     "failures": [
+      {
+       "point": "p4",
+       "reasons": [
+        "date_not_in_quote:26/11/2026"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "Pay by: 26/11/2026",
+     "quote": "You are required to pay the above sum within 30 days of service of this notice, that is on or before 25-NOV-2026. If you disagree with this demand, you may submit your response with documents by 10-NOV-2026.",
+     "reasons": [
+      "date_not_in_quote:26/11/2026"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tax-038",
+   "language": "bn",
+   "verified": 3,
+   "check_yourself": 2,
+   "shown": 3,
+   "wrong_shown": 0,
+   "wrong_held_back": 2,
+   "wrong_examples": [],
+   "cost_usd": 0.0,
+   "seconds": 0.1,
+   "trace": [
+    {
+     "step": "find_page",
+     "model": "sam-3.1",
+     "detail": "'sheet of paper': 0 found, using the whole photo",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 0
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "882 characters read",
+     "ms": 0
+    },
+    {
+     "step": "explain",
+     "model": "mock",
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 0
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 375, 1587, 999): 882 characters",
+     "ms": 6
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1587, 540): 882 characters",
+     "ms": 7
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 834, 1587, 1374): 882 characters",
+     "ms": 10
+    },
+    {
+     "step": "check",
+     "model": "deterministic",
+     "detail": "3 verified, 2 failed",
+     "ms": 8,
+     "failures": [
+      {
+       "point": "p1",
+       "reasons": [
+        "number_not_in_quote:87,850.00"
+       ]
+      },
+      {
+       "point": "p2",
+       "reasons": [
+        "number_not_in_quote:5,271.00"
+       ]
+      }
+     ]
+    }
+   ],
+   "check_yourself_points": [
+    {
+     "say": "কর: ₹87,850.00",
+     "quote": "Tax payable\tINR 87,840.00",
+     "reasons": [
+      "number_not_in_quote:87,850.00"
+     ]
+    },
+    {
+     "say": "সুদ: ₹5,271.00",
+     "quote": "Interest\tINR 5,270.00",
+     "reasons": [
+      "number_not_in_quote:5,271.00"
+     ]
+    }
+   ]
+  }
+ ]
+}
