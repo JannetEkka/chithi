@@ -48,6 +48,7 @@ def main():
     ap.add_argument("--backend", choices=["mock", "live", "live-open"], default="mock")
     ap.add_argument("--n", type=int, default=40)
     ap.add_argument("--per-kind", type=int, default=0, help="take this many letters of each kind instead of the first --n")
+    ap.add_argument("--photo", choices=["photo", "hard"], default="photo", help="hard: folded, shadowed, skewed, blurred")
     ap.add_argument("--no-repair", action="store_true")
     args = ap.parse_args()
 
@@ -71,7 +72,7 @@ def main():
             backend = MockBackend(truth, seed=i)
         else:
             backend = agent.LiveBackend("spark-open" if args.backend == "live-open" else "spark")
-        photo = (path.parent / f"{truth['id']}.photo.jpg").read_bytes()
+        photo = (path.parent / f"{truth['id']}.{args.photo}.jpg").read_bytes()
         t = time.time()
         try:
             res = agent.run(photo, lang, backend, repair=not args.no_repair)
@@ -91,7 +92,7 @@ def main():
     ok = [r for r in rows if "error" not in r]
     total = {k: sum(r[k] for r in ok) for k in ["verified", "check_yourself", "shown", "wrong_shown", "wrong_held_back"]}
     total.update(letters=len(rows), errors=len(rows) - len(ok), cost_usd=round(sum(r["cost_usd"] for r in ok), 4))
-    out = ROOT / "eval" / f"results-{args.backend}{'-norepair' if args.no_repair else ''}-{len(rows)}.json"
+    out = ROOT / "eval" / f"results-{args.backend}{'-hard' if args.photo == 'hard' else ''}{'-norepair' if args.no_repair else ''}-{len(rows)}.json"
     out.write_text(json.dumps({"total": total, "letters": rows}, ensure_ascii=False, indent=1))
     pts = total["verified"] + total["check_yourself"]
     print(f"\n| letters | points | verified | held back | values shown | wrong values shown | wrong values held back | cost |")
