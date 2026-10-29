@@ -59,7 +59,13 @@ The test set is 40 synthetic letters ([`letters/generate.py`](letters/generate.p
 |---|---|---|---|---|---|---|---|
 | 12 | 66 | 66 | 0 | 56 | 0 | $0.52 | 13–23 s |
 
-On these clean synthetic photos Muse Spark read every page correctly and every point passed, so the check had nothing to catch. Twelve letters is a small sample. The next runs add harder photos (blur, a fold, a shadow across an amount), where reading errors are likely.
+**Harder photos** (Oct 29; 8 letters, 2 of each kind, folded, with a hard shadow across half the page, skewed, blurred and heavily compressed; `--photo hard --per-kind 2`):
+
+| letters | points | verified | held back | values shown | wrong values shown | cost |
+|---|---|---|---|---|---|---|
+| 8 | 38 | 38 | 0 | 31 | 0 | $0.32 |
+
+In both runs Muse Spark read every date and amount correctly, so every point passed and the check had nothing to hold back. That shows the readings are good on these photos; it doesn't show the check catching a real model error, since none happened. The stand-in run above is what shows the check holds back wrong values. 20 letters is a small sample, and the letters are synthetic.
 
 **The check alone**, with a stand-in explainer that gets about a quarter of its values wrong on purpose (`--backend mock --no-repair`):
 
