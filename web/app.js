@@ -12,6 +12,7 @@ const T = {
     footer: "Chithi আইনি পরামর্শ দেয় না। সন্দেহ হলে চিঠি যিনি পাঠিয়েছেন তাঁর সঙ্গে যোগাযোগ করুন।",
     steps: ["ছবিতে চিঠি খোঁজা (SAM 3.1)", "গুরুত্বপূর্ণ অংশ খোঁজা (SAM 3.1)", "চিঠি পড়া (Muse Spark)", "আবার পড়া, কাছ থেকে", "বাংলায় বোঝানো", "প্রতিটি তারিখ ও অঙ্ক যাচাই"],
     noneVerified: "কোনো কথা যাচাই করা যায়নি।",
+    privacy: "ছবি Meta-র মডেলে পাঠানো হয়, এবং Meta তা তাদের পরিষেবা উন্নত করতে ব্যবহার করতে পারে। নাম, ঠিকানা আর অ্যাকাউন্ট নম্বর ঢেকে ছবি তুলুন।",
   },
   hi: {
     title: "सरकारी चिट्ठी समझिए, अपनी भाषा में",
@@ -24,6 +25,7 @@ const T = {
     footer: "Chithi क़ानूनी सलाह नहीं देता। शक हो तो चिट्ठी भेजने वाले से संपर्क करें।",
     steps: ["फ़ोटो में चिट्ठी ढूँढना (SAM 3.1)", "ज़रूरी हिस्से ढूँढना (SAM 3.1)", "चिट्ठी पढ़ना (Muse Spark)", "दोबारा पढ़ना, पास से", "हिन्दी में समझाना", "हर तारीख़ और रकम की जाँच"],
     noneVerified: "कोई बात जाँची नहीं जा सकी।",
+    privacy: "फ़ोटो Meta के मॉडल को भेजी जाती है, और Meta उसे अपनी सेवा सुधारने में इस्तेमाल कर सकता है। नाम, पता और खाता नंबर ढककर फ़ोटो लें।",
   },
   en: {
     title: "Understand an official letter, in your own language",
@@ -36,6 +38,7 @@ const T = {
     footer: "Chithi doesn't give legal advice. If in doubt, contact whoever sent the letter.",
     steps: ["Finding the letter in the photo (SAM 3.1)", "Finding the parts that matter (SAM 3.1)", "Reading the letter (Muse Spark)", "Reading it again, up close", "Explaining it in English", "Checking every date and amount"],
     noneVerified: "Nothing could be verified.",
+    privacy: "The photo is sent to Meta's models, and Meta may use it to improve its service. Cover your name, address and account numbers before you take it.",
   },
 };
 const KIND = { electricity_bill: "Electricity bill", bank_notice: "Bank notice", tax_notice: "Tax notice", property_tax_notice: "Property tax (Hindi)" };
@@ -128,7 +131,7 @@ function render(d, photoUrl) {
     `<li><b>${esc(s.step)}</b> <code>${esc(s.model)}</code> ${esc(s.detail)} <span class="ms">${(s.ms / 1000).toFixed(1)} s</span></li>`).join("");
   $("cost").textContent = d.backend === "mock"
     ? "Demo mode: sample letter, no model was called. The check is the real one."
-    : `Model cost for this letter: $${d.cost_usd.toFixed(3)}`;
+    : `Model cost for this letter: $${d.cost_usd.toFixed(3)}, ${d.seconds} s` + (d.cached ? " (an earlier run of this sample, shown again)" : "");
   $("letterText").textContent = d.letter_text;
   $("answers").innerHTML = "";
   $("askBox").hidden = d.backend === "mock";

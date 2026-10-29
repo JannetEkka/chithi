@@ -16,7 +16,9 @@ from __future__ import annotations
 import io
 import json
 import os
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 from PIL import Image, ImageOps
@@ -25,8 +27,11 @@ from . import meta, prompts, verify
 
 # Short noun phrases for SAM 3.1: one concept per request.
 PAGE_CONCEPT = os.environ.get("CHITHI_PAGE_CONCEPT", "sheet of paper")
-REGION_CONCEPTS = [c.strip() for c in os.environ.get("CHITHI_REGION_CONCEPTS", "table,stamp,boxed text").split(",") if c.strip()]
+REGION_CONCEPTS = [c.strip() for c in os.environ.get("CHITHI_REGION_CONCEPTS", "table,rectangle,stamp").split(",") if c.strip()]
 BANDS = 3  # the page is also read again in this many overlapping strips
+# Copying text needs little thought; explaining needs some. Reasoning is billed as output.
+READ_EFFORT = os.environ.get("CHITHI_READ_EFFORT", "minimal")
+EXPLAIN_EFFORT = os.environ.get("CHITHI_EXPLAIN_EFFORT", "low")
 
 # USD, from dev.meta.ai/docs/pricing-rate-limits (10-27).
 PRICE = {"spark_in": 1.25 / 1e6, "spark_out": 4.25 / 1e6, "sam_image": 2.50 / 1000}
@@ -54,6 +59,7 @@ class Result:
     image_size: tuple[int, int] = (0, 0)
     trace: list[dict] = field(default_factory=list)
     cost_usd: float = 0.0
+    seconds: float = 0.0
 
     def to_dict(self) -> dict:
         return self.__dict__.copy()
@@ -63,16 +69,21 @@ class Trace:
     def __init__(self, result: Result, billable: bool = True):
         self.result = result
         self.billable = billable
+        self.lock = threading.Lock()  # steps finish on worker threads
 
     def step(self, name: str, model: str, detail: str, started: float, usage: dict | None = None, **extra):
         u = usage or {}
         cost = u.get("input_tokens", 0) * PRICE["spark_in"] + u.get("output_tokens", 0) * PRICE["spark_out"]
         if model.startswith("sam"):
             cost = PRICE["sam_image"]
-        if self.billable:
-            self.result.cost_usd += cost
-        self.result.trace.append({"step": name, "model": model, "detail": detail,
-                                  "ms": int((time.time() - started) * 1000), **extra})
+        if u:
+            extra["tokens"] = {"in": u.get("input_tokens", 0), "out": u.get("output_tokens", 0),
+                               "reasoning": (u.get("output_tokens_details") or {}).get("reasoning_tokens", 0)}
+        with self.lock:
+            if self.billable:
+                self.result.cost_usd += cost
+            self.result.trace.append({"step": name, "model": model, "detail": detail,
+                                      "ms": int((time.time() - started) * 1000), **extra})
 
 
 # --- backends ----------------------------------------------------------------
@@ -89,7 +100,7 @@ class LiveBackend:
 
     def read(self, image: bytes) -> tuple[str, dict]:
         return meta.spark([{"type": "input_text", "text": prompts.READ},
-                           {"type": "input_image", "image_url": meta.data_url(image)}])
+                           {"type": "input_image", "image_url": meta.data_url(image)}], effort=READ_EFFORT)
 
     def ask(self, instructions: str, letter_text: str, extra: str = "") -> tuple[dict, dict, str]:
         user = f"LETTER TEXT:\n<<<\n{letter_text}\n>>>\n{extra}"
@@ -98,7 +109,8 @@ class LiveBackend:
                                       schema=prompts.POINTS_SCHEMA)
             model = meta.SPARK_OPEN
         else:
-            text, u = meta.spark([{"type": "input_text", "text": user}], instructions=instructions, schema=prompts.POINTS_SCHEMA)
+            text, u = meta.spark([{"type": "input_text", "text": user}], instructions=instructions, schema=prompts.POINTS_SCHEMA,
+                                 effort=EXPLAIN_EFFORT)
             model = meta.SPARK
         return json.loads(_strip_fences(text)), u, model
 
@@ -131,6 +143,7 @@ def _zoom(img: Image.Image, min_width: int = 1400) -> Image.Image:
 
 def run(photo: bytes, language: str, backend, *, repair: bool = True) -> Result:
     res = Result(language=language)
+    began = time.time()
     tr = Trace(res, billable=backend.name != "mock")
     img = ImageOps.exif_transpose(Image.open(io.BytesIO(photo))).convert("RGB")
     img.thumbnail((2000, 2000))
@@ -150,42 +163,57 @@ def run(photo: bytes, language: str, backend, *, repair: bool = True) -> Result:
     tr.step("find_page", meta.SAM, f"'{PAGE_CONCEPT}': {len(pages)} found" + (", cropped to it" if res.page_box else ", using the whole photo"), t)
     page_bytes = jpeg(page_img)
 
-    # 2. Find the regions that matter: tables, stamps, boxed amounts.
-    regions: list[Region] = []
-    for concept in REGION_CONCEPTS:
-        t = time.time()
-        found = backend.segment(page_bytes, concept)
-        for b in found:
-            sx, sy = page_img.width / b.w, page_img.height / b.h
-            regions.append(Region(concept, (int(b.x1 * sx), int(b.y1 * sy), int(b.x2 * sx), int(b.y2 * sy)), score=b.score))
-        tr.step("find_regions", meta.SAM, f"'{concept}': {len(found)} found", t)
-
-    # 3. Read the whole page.
-    t = time.time()
-    letter_text, u = backend.read(page_bytes)
-    res.letter_text = letter_text
-    tr.step("read_page", meta.SPARK, f"{len(letter_text)} characters read", t, u)
-
-    # 4. Read it again, independently: each region, and the page in strips, zoomed in.
+    # 2-4. In parallel: find the regions that matter (tables, boxed amounts,
+    # stamps), read the whole page, and read it again in zoomed-in strips.
     h = page_img.height
     strips = [Region("strip", (0, max(0, int(i * h / BANDS - 0.06 * h)), page_img.width - 1, min(h - 1, int((i + 1) * h / BANDS + 0.06 * h))))
               for i in range(BANDS)]
-    for reg in regions + strips:
+
+    def find(concept):
+        t = time.time()
+        found = backend.segment(page_bytes, concept)
+        tr.step("find_regions", meta.SAM, f"'{concept}': {len(found)} found", t)
+        return [Region(concept, (int(b.x1 * page_img.width / b.w), int(b.y1 * page_img.height / b.h),
+                                 int(b.x2 * page_img.width / b.w), int(b.y2 * page_img.height / b.h)), score=b.score)
+                for b in found]
+
+    def read_page():
+        t = time.time()
+        text, u = backend.read(page_bytes)
+        tr.step("read_page", meta.SPARK, f"{len(text)} characters read", t, u)
+        return text
+
+    def read_again(reg):
         t = time.time()
         reg.text, u = backend.read(jpeg(_zoom(_crop(page_img, reg.box))))
         tr.step("read_again", meta.SPARK, f"{reg.concept} at {reg.box}: {len(reg.text)} characters", t, u)
+
+    language_name = prompts.LANGUAGES[language]
+
+    def explain(letter_text):
+        t = time.time()
+        out, u, model = backend.ask(prompts.EXPLAIN.format(language=language_name), letter_text)
+        tr.step("explain", model, f"{len(out.get('points', []))} points in {language_name}", t, u)
+        return out
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        found = [pool.submit(find, c) for c in REGION_CONCEPTS]
+        page_read = pool.submit(read_page)
+        strip_reads = [pool.submit(read_again, r) for r in strips]
+        regions = [r for f in found for r in f.result()]
+        region_reads = [pool.submit(read_again, r) for r in regions]
+        letter_text = page_read.result()
+        # 5. Explain, quoting the letter, while the regions are still being read.
+        out = pool.submit(explain, letter_text).result()
+        for f in strip_reads + region_reads:
+            f.result()
+    res.letter_text = letter_text
     second = "\n".join(r.text for r in regions + strips)
     res.second_reading = second
     res.regions = [{"concept": r.concept, "box": _shift(r.box, offset), "text": r.text, "score": r.score} for r in regions]
-
-    # 5. Explain, quoting the letter.
-    language_name = prompts.LANGUAGES[language]
-    t = time.time()
-    out, u, model = backend.ask(prompts.EXPLAIN.format(language=language_name), letter_text)
     res.kind, res.summary = out.get("kind", ""), out.get("summary", "")
     points = [verify.Point(f"p{i + 1}", p["say"], p["quote"]) for i, p in enumerate(out.get("points", []))]
     topics = {f"p{i + 1}": p.get("topic", "other") for i, p in enumerate(out.get("points", []))}
-    tr.step("explain", model, f"{len(points)} points in {language_name}", t, u)
 
     # 6. Check every point.
     t = time.time()
@@ -219,6 +247,7 @@ def run(photo: bytes, language: str, backend, *, repair: bool = True) -> Result:
                "reasons_text": [verify.explain_reason(r) for r in c.reasons]}
         (res.verified if c.status == "verified" else res.check_yourself).append(row)
     res.cost_usd = round(res.cost_usd, 4)
+    res.seconds = round(time.time() - began, 1)
     return res
 
 

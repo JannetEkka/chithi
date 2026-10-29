@@ -6,7 +6,7 @@ Photograph an official Indian letter (an electricity bill, a bank notice, a tax 
 
 Built for the Meta Global AI Developer Hackathon (Cerebral Valley, October–November 2026), Indie developer track, problem statement "Build for Your World".
 
-**Status (Oct 27):** the check, the pipeline, the synthetic test letters, the evaluation and the web page work. Meta's models are wired in from their docs but not yet called with a key; until then the app runs in demo mode on the sample letters, with a stand-in explainer.
+**Status (Oct 29):** the whole pipeline runs on Meta's models. First live measurement below. Not deployed yet.
 
 ## Why
 
@@ -41,7 +41,11 @@ Spoken questions in Bengali or Hindi go through Muse Voice Transcribe, and the a
 | Muse Voice Transcribe | Spoken questions | Hindi and Bengali are among its 25 languages |
 | Muse Spark Open (Baseten) | The explainer, as an option (`CHITHI_EXPLAINER=spark-open`) | An open-weight model for the same job, measured the same way |
 
-Chithi uses the standard Muse Spark tier, not the cheaper contributor tier, because contributor-tier prompts may be used for training and these are people's letters.
+Reading uses `reasoning.effort: minimal` and explaining uses `low`: copying text needs little thought, and reasoning is billed as output. On the first test letter this halved the cost ($0.076 to $0.043) and the time (69 s to 32 s) with the same result. The SAM calls, the page read and the zoomed-in reads then run in parallel, which brings a letter to 13–23 s.
+
+SAM 3.1 takes one short noun phrase per request. On these letters "table" finds the charges table and "rectangle" finds the boxed due date; "boxed text" and "text box" found nothing.
+
+While the hackathon's free credits are in use, Meta says content sent to the API may be used for product improvement. The page says so next to the camera button and asks people to cover their name, address and account numbers.
 
 ## Measured
 
@@ -49,7 +53,13 @@ The test set is 40 synthetic letters ([`letters/generate.py`](letters/generate.p
 
 [`eval/run.py`](eval/run.py) explains each letter in Bengali, Hindi or English and counts the dates and numbers shown to the reader as verified that are not on the letter. It compares them with the generator's true text, so a misreading of the photo counts as an error too.
 
-**With Meta's models:** not measured yet (needs the API key).
+**With Meta's models** (Oct 29; 12 letters, 3 of each kind, explained in Bengali, Hindi and English in turn; `--backend live --per-kind 3`):
+
+| letters | points | verified | held back | values shown | wrong values shown | cost | time per letter |
+|---|---|---|---|---|---|---|---|
+| 12 | 66 | 66 | 0 | 56 | 0 | $0.52 | 13–23 s |
+
+On these clean synthetic photos Muse Spark read every page correctly and every point passed, so the check had nothing to catch. Twelve letters is a small sample. The next runs add harder photos (blur, a fold, a shadow across an amount), where reading errors are likely.
 
 **The check alone**, with a stand-in explainer that gets about a quarter of its values wrong on purpose (`--backend mock --no-repair`):
 

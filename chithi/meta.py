@@ -140,8 +140,11 @@ def segment(image: bytes, concept: str, mime: str = "image/jpeg") -> list[Box]:
 # --- Muse Spark --------------------------------------------------------------
 
 def spark(content: list[dict], *, instructions: str | None = None, schema: dict | None = None,
-          model: str | None = None) -> tuple[str, dict]:
+          model: str | None = None, effort: str | None = None) -> tuple[str, dict]:
     body: dict = {"model": model or SPARK, "input": [{"type": "message", "role": "user", "content": content}]}
+    if effort:
+        # minimal, low, medium, high, xhigh or max; reasoning is billed as output.
+        body["reasoning"] = {"effort": effort}
     if instructions:
         body["instructions"] = instructions
     if schema:
