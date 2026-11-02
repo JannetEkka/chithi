@@ -189,7 +189,7 @@ async function loadSamples() {
     $("mode").textContent = "Demo mode: Meta's models aren't connected yet, so only the sample letters work, with a stand-in explainer. The check is the real one.";
   }
   $("samples").innerHTML = samples.map((s) =>
-    `<button class="sample" data-id="${esc(s.id)}" data-photo="${esc(s.photo)}"><img src="${esc(s.photo)}" alt="" loading="lazy"><span>${esc(KIND[s.kind] || s.kind)}</span></button>`).join("");
+    `<button class="sample" data-id="${esc(s.id)}" data-photo="${esc(s.photo)}"><img src="${esc(s.photo)}" alt="" loading="lazy"><span>${esc(KIND[s.kind] || s.kind)}${s.hard ? " · folded, shadowed" : ""}</span></button>`).join("");
   document.querySelectorAll(".sample").forEach((b) => b.addEventListener("click", () => {
     const form = new FormData();
     form.append("sample_id", b.dataset.id);

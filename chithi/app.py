@@ -54,8 +54,9 @@ def _explainer() -> str:
 
 
 def _truth(sample_id: str) -> dict:
-    path = SAMPLES / f"{sample_id}.json"
-    if not sample_id.replace("-", "").isalnum() or not path.exists():
+    """A sample id is a letter id, with ".hard" for its folded, shadowed photo."""
+    path = SAMPLES / f"{sample_id.removesuffix('.hard')}.json"
+    if not sample_id.removesuffix(".hard").replace("-", "").isalnum() or not path.exists():
         raise HTTPException(404, "No such sample letter")
     return json.loads(path.read_text())
 
@@ -74,13 +75,19 @@ def health():
 
 @app.get("/api/samples")
 def samples():
+    # Two of each kind is plenty for the picker: one clean photo, one hard one.
     out = []
+    seen: dict[str, int] = defaultdict(int)
     for p in sorted(SAMPLES.glob("*.json")):
         t = json.loads(p.read_text())
-        out.append({"id": t["id"], "kind": t["kind"], "language": t["language"], "photo": f"/samples/{t['id']}.photo.jpg"})
-    # A few of each kind is plenty for the picker.
-    seen: dict[str, int] = defaultdict(int)
-    return [s for s in out if (seen.__setitem__(s["kind"], seen[s["kind"]] + 1) or seen[s["kind"]] <= 2)]
+        seen[t["kind"]] += 1
+        if seen[t["kind"]] > 2:
+            continue
+        hard = seen[t["kind"]] == 2
+        sid = t["id"] + (".hard" if hard else "")
+        out.append({"id": sid, "kind": t["kind"], "language": t["language"], "hard": hard,
+                    "photo": f"/samples/{t['id']}.{'hard' if hard else 'photo'}.jpg"})
+    return out
 
 
 @app.post("/api/explain")
@@ -90,7 +97,7 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
         raise HTTPException(400, "language must be bn, hi or en")
     if sample_id:
         truth = _truth(sample_id)
-        image = (SAMPLES / f"{sample_id}.photo.jpg").read_bytes()
+        image = (SAMPLES / (f"{truth['id']}.hard.jpg" if sample_id.endswith(".hard") else f"{sample_id}.photo.jpg")).read_bytes()
     elif photo is not None:
         truth = None
         image = await photo.read()
