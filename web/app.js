@@ -86,7 +86,8 @@ async function explain(form, photoUrl) {
   form.append("language", lang);
   startSteps(photoUrl);
   try {
-    const r = await fetch("/api/explain", { method: "POST", body: form });
+    // Give up after two minutes rather than spin forever.
+    const r = await fetch("/api/explain", { method: "POST", body: form, signal: AbortSignal.timeout(120000) });
     const data = await r.json();
     if (!r.ok) throw new Error(data.detail || r.statusText);
     current = data;
@@ -95,7 +96,7 @@ async function explain(form, photoUrl) {
     show("start");
     $("mode").hidden = false;
     $("mode").className = "error";
-    $("mode").textContent = e.message;
+    $("mode").textContent = e.name === "TimeoutError" ? "That took too long. Please try again." : e.message;
   } finally {
     clearInterval(stepTimer);
   }
@@ -174,7 +175,7 @@ async function ask(form) {
   box.innerHTML = `<p class="heard">…</p>`;
   $("answers").prepend(box);
   try {
-    const r = await fetch("/api/ask", { method: "POST", body: form });
+    const r = await fetch("/api/ask", { method: "POST", body: form, signal: AbortSignal.timeout(120000) });
     const d = await r.json();
     if (!r.ok) throw new Error(d.detail || r.statusText);
     box.innerHTML = `<p class="heard">“${esc(d.question)}”</p>` + d.verified.map((p) => card(p, false)).join("") + d.check_yourself.map((p) => card(p, true)).join("");

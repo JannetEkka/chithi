@@ -9,6 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -108,7 +109,8 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     else:
         raise HTTPException(503, "Live models aren't switched on yet; try a sample letter.")
     try:
-        res = agent.run(image, language, backend)
+        # The models take 15-30 s; keep the server free for other requests meanwhile.
+        res = await run_in_threadpool(agent.run, image, language, backend)
     except meta.MetaError as e:
         raise HTTPException(502, f"A Meta model call failed: {e}") from e
     out = res.to_dict()
@@ -129,10 +131,11 @@ async def ask(request: Request, language: str = Form("bn"), letter_text: str = F
     heard = None
     if audio is not None:
         wav = await audio.read()
-        heard = meta.transcribe(wav, language_bias=[{"bn": "bn", "hi": "hi", "en": "en"}[language]])
+        heard = await run_in_threadpool(meta.transcribe, wav, language_bias=[{"bn": "bn", "hi": "hi", "en": "en"}[language]])
         question = heard
     if not question.strip():
         raise HTTPException(400, "Ask a question, typed or spoken")
-    out = agent.answer(question, letter_text, second_reading or None, language, agent.LiveBackend(_explainer()))
+    out = await run_in_threadpool(agent.answer, question, letter_text, second_reading or None, language,
+                                  agent.LiveBackend(_explainer()))
     out["heard"] = heard
     return out
