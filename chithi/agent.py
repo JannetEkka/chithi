@@ -28,7 +28,7 @@ from . import meta, prompts, values, verify
 # Short noun phrases for SAM 3.1: one concept per request.
 PAGE_CONCEPT = os.environ.get("CHITHI_PAGE_CONCEPT", "sheet of paper")
 REGION_CONCEPTS = [c.strip() for c in os.environ.get("CHITHI_REGION_CONCEPTS", "table,rectangle,stamp").split(",") if c.strip()]
-BANDS = 3  # the page is also read again in this many overlapping strips
+BANDS = 5  # the page is also read again in this many overlapping strips
 # Copying text needs little thought; explaining needs some. Reasoning is billed as output.
 READ_EFFORT = os.environ.get("CHITHI_READ_EFFORT", "minimal")
 EXPLAIN_EFFORT = os.environ.get("CHITHI_EXPLAIN_EFFORT", "low")
@@ -67,9 +67,10 @@ class Result:
 
 
 class Trace:
-    def __init__(self, result: Result, billable: bool = True):
+    def __init__(self, result: Result, billable: bool = True, emit=None):
         self.result = result
         self.billable = billable
+        self.emit = emit or (lambda event: None)  # live progress for the page
         self.lock = threading.Lock()  # steps finish on worker threads
 
     def step(self, name: str, model: str, detail: str, started: float, usage: dict | None = None, **extra):
@@ -83,8 +84,9 @@ class Trace:
         with self.lock:
             if self.billable:
                 self.result.cost_usd += cost
-            self.result.trace.append({"step": name, "model": model, "detail": detail,
-                                      "ms": int((time.time() - started) * 1000), **extra})
+            row = {"step": name, "model": model, "detail": detail, "ms": int((time.time() - started) * 1000), **extra}
+            self.result.trace.append(row)
+        self.emit({"type": "step", **row})
 
 
 # --- backends ----------------------------------------------------------------
@@ -157,10 +159,12 @@ def tamper_one(points: list[verify.Point]) -> tuple[str, str] | None:
     return None
 
 
-def run(photo: bytes, language: str, backend, *, repair: bool = True, tamper: bool = False) -> Result:
+def run(photo: bytes, language: str, backend, *, repair: bool = True, tamper: bool = False, emit=None) -> Result:
+    """`emit`, if given, is called with each event as it happens (the page
+    shows them live): {"type": "page" | "regions" | "step", ...}."""
     res = Result(language=language)
     began = time.time()
-    tr = Trace(res, billable=backend.name != "mock")
+    tr = Trace(res, billable=backend.name != "mock", emit=emit)
     img = ImageOps.exif_transpose(Image.open(io.BytesIO(photo))).convert("RGB")
     img.thumbnail((2000, 2000))
     res.image_size = img.size
@@ -176,22 +180,25 @@ def run(photo: bytes, language: str, backend, *, repair: bool = True, tamper: bo
         box = (int(best.x1 * sx), int(best.y1 * sy), int(best.x2 * sx), int(best.y2 * sy))
         if (box[2] - box[0]) * (box[3] - box[1]) > 0.25 * img.width * img.height:
             page_img, offset, res.page_box = _crop(img, box, 0.01), box[:2], box
+    tr.emit({"type": "page", "box": res.page_box, "image_size": res.image_size})
     tr.step("find_page", meta.SAM, f"'{PAGE_CONCEPT}': {len(pages)} found" + (", cropped to it" if res.page_box else ", using the whole photo"), t)
     page_bytes = jpeg(page_img)
 
     # 2-4. In parallel: find the regions that matter (tables, boxed amounts,
     # stamps), read the whole page, and read it again in zoomed-in strips.
     h = page_img.height
-    strips = [Region("strip", (0, max(0, int(i * h / BANDS - 0.06 * h)), page_img.width - 1, min(h - 1, int((i + 1) * h / BANDS + 0.06 * h))))
+    strips = [Region("strip", (0, max(0, int(i * h / BANDS - 0.04 * h)), page_img.width - 1, min(h - 1, int((i + 1) * h / BANDS + 0.04 * h))))
               for i in range(BANDS)]
 
     def find(concept):
         t = time.time()
         found = backend.segment(page_bytes, concept)
-        tr.step("find_regions", meta.SAM, f"'{concept}': {len(found)} found", t)
-        return [Region(concept, (int(b.x1 * page_img.width / b.w), int(b.y1 * page_img.height / b.h),
+        regs = [Region(concept, (int(b.x1 * page_img.width / b.w), int(b.y1 * page_img.height / b.h),
                                  int(b.x2 * page_img.width / b.w), int(b.y2 * page_img.height / b.h)), score=b.score)
                 for b in found]
+        tr.emit({"type": "regions", "concept": concept, "boxes": [_shift(r.box, offset) for r in regs]})
+        tr.step("find_regions", meta.SAM, f"'{concept}': {len(found)} found", t)
+        return regs
 
     def read_page():
         t = time.time()
@@ -264,13 +271,26 @@ def run(photo: bytes, language: str, backend, *, repair: bool = True, tamper: bo
             points = [p for p, _ in keep] + new_points
             checks = [c for _, c in keep] + new_checks
 
+    # Where each value is printed: the smallest piece of the photo (a SAM region
+    # or a strip) whose separate reading contains it. Exact pieces, so the page
+    # never points at the wrong line; a strip is a few lines tall.
+    where = {}  # value key -> box on the photo
+    for reg in sorted(regions + strips, key=lambda r: (r.box[2] - r.box[0]) * (r.box[3] - r.box[1])):
+        for f in values.find_values(reg.text):
+            where.setdefault(values.key(f), _shift(reg.box, offset))
     for p, c in zip(points, checks):
         row = {"id": p.id, "say": p.say, "quote": p.quote, "topic": topics.get(p.id, "other"), **c.to_dict(),
-               "reasons_text": [verify.explain_reason(r) for r in c.reasons]}
+               "reasons_text": [verify.explain_reason(r) for r in c.reasons],
+               "where": _where(where, p.say) or _where(where, c.evidence)}
         (res.verified if c.status == "verified" else res.check_yourself).append(row)
     res.cost_usd = round(res.cost_usd, 4)
     res.seconds = round(time.time() - began, 1)
     return res
+
+
+def _where(where: dict, text: str) -> list:
+    """Boxes on the photo for the dates and amounts in `text`, first one first."""
+    return [where[k] for k in dict.fromkeys(values.key(f) for f in values.find_values(text or "")) if k in where]
 
 
 def _shift(box, offset):

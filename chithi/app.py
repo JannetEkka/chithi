@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import time
@@ -10,7 +11,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import agent, meta, prompts
@@ -92,7 +93,9 @@ def samples():
 
 @app.post("/api/explain")
 async def explain(request: Request, language: str = Form("bn"), sample_id: str = Form(""), tamper: bool = Form(False),
-                  photo: UploadFile | None = File(None)):
+                  stream: bool = Form(False), photo: UploadFile | None = File(None)):
+    """The letter explained and checked. With stream=true the answer is
+    newline-delimited JSON: each step as it happens, then {"type": "result"}."""
     if language not in prompts.LANGUAGES:
         raise HTTPException(400, "language must be bn, hi or en")
     if sample_id:
@@ -109,25 +112,56 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     if tamper and not sample_id:
         raise HTTPException(400, "Test mode works on the sample letters only")
     key = (sample_id, language, tamper)
-    if live() and sample_id and key in _sample_cache:
-        return {**_sample_cache[key], "cached": True}
-    if live():
-        _spend(request)
-        backend = agent.LiveBackend(_explainer())
-    elif truth is not None:
-        backend = MockBackend(truth)
-    else:
-        raise HTTPException(503, "Live models aren't switched on yet; try a sample letter.")
-    try:
-        # The models take 15-30 s; keep the server free for other requests meanwhile.
-        res = await run_in_threadpool(lambda: agent.run(image, language, backend, tamper=tamper))
-    except meta.MetaError as e:
-        raise HTTPException(502, f"A Meta model call failed: {e}") from e
-    out = res.to_dict()
-    out["backend"] = backend.name
-    if sample_id and backend.name == "live":
-        _sample_cache[key] = out
-    return out
+    cached = _sample_cache.get(key) if live() and sample_id else None
+    if cached is None:
+        if live():
+            _spend(request)
+            backend = agent.LiveBackend(_explainer())
+        elif truth is not None:
+            backend = MockBackend(truth)
+        else:
+            raise HTTPException(503, "Live models aren't switched on yet; try a sample letter.")
+
+    def finish(res) -> dict:
+        out = res.to_dict()
+        out["backend"] = backend.name
+        if sample_id and backend.name == "live":
+            _sample_cache[key] = out
+        return out
+
+    if not stream:
+        if cached is not None:
+            return {**cached, "cached": True}
+        try:
+            # The models take 15-30 s; keep the server free for other requests meanwhile.
+            res = await run_in_threadpool(lambda: agent.run(image, language, backend, tamper=tamper))
+        except meta.MetaError as e:
+            raise HTTPException(502, f"A Meta model call failed: {e}") from e
+        return finish(res)
+
+    queue: asyncio.Queue = asyncio.Queue()
+    loop = asyncio.get_running_loop()
+
+    async def work():
+        if cached is not None:
+            await queue.put({"type": "result", "result": {**cached, "cached": True}})
+        else:
+            try:
+                res = await run_in_threadpool(lambda: agent.run(
+                    image, language, backend, tamper=tamper, emit=lambda ev: loop.call_soon_threadsafe(queue.put_nowait, ev)))
+                await queue.put({"type": "result", "result": finish(res)})
+            except Exception as e:  # reported to the page, which shows it
+                await queue.put({"type": "error", "detail": f"A Meta model call failed: {e}" if isinstance(e, meta.MetaError) else str(e)})
+        await queue.put(None)
+
+    async def lines():
+        task = asyncio.create_task(work())
+        while (ev := await queue.get()) is not None:
+            yield json.dumps(ev, ensure_ascii=False) + "\n"
+        await task
+
+    return StreamingResponse(lines(), media_type="application/x-ndjson",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
 
 @app.post("/api/ask")

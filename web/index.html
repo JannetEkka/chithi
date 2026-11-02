@@ -1,86 +1,139 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chithi · official letters, explained and checked</title>
 <meta name="description" content="Photograph an official Indian letter and get it explained in Bengali, Hindi or English. Every date and amount is checked against the letter before you see it.">
+<meta name="theme-color" content="#faf6ee">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header>
-  <div class="brand"><span class="logo">চিঠি</span><span class="name">Chithi</span></div>
+<header class="top">
+  <a class="brand" href="/" aria-label="Chithi"><span class="logo">চিঠি</span><span class="name">Chithi</span></a>
   <div class="langs" role="radiogroup" aria-label="Language">
-    <button data-lang="bn" class="on">বাংলা</button><button data-lang="hi">हिन्दी</button><button data-lang="en">English</button>
+    <button data-lang="bn" role="radio">বাংলা</button><button data-lang="hi" role="radio">हिन्दी</button><button data-lang="en" role="radio">English</button>
   </div>
 </header>
 
 <main>
-  <section id="start">
-    <h1 data-t="title"></h1>
-    <p class="lede" data-t="lede"></p>
-    <div id="mode" class="mode" hidden></div>
-    <label class="camera">
-      <input id="photo" type="file" accept="image/*" capture="environment">
-      <span data-t="take"></span>
-    </label>
-    <p class="privacy" data-t="privacy"></p>
-    <p class="or" data-t="or"></p>
-    <div id="samples" class="samples"></div>
-  </section>
-
-  <section id="working" hidden>
-    <img id="workingPhoto" alt="">
-    <ol id="steps" class="steps"></ol>
-  </section>
-
-  <section id="result" hidden>
-    <div class="photo-wrap"><img id="resultPhoto" alt=""><svg id="overlay"></svg></div>
-    <p class="tampered" id="tampered" data-t="tampered" hidden></p>
-    <p class="kind" id="kind"></p>
-    <p class="summary" id="summary"></p>
-
-    <h2 class="ok-h"><span class="dot ok"></span><span data-t="checked"></span></h2>
-    <div id="verified" class="cards"></div>
-
-    <div id="cyWrap">
-      <h2 class="cy-h"><span class="dot cy"></span><span data-t="checkYourself"></span></h2>
-      <p class="note" data-t="checkYourselfNote"></p>
-      <div id="checkYourself" class="cards"></div>
-    </div>
-
-    <button id="tamperBtn" class="tamper-btn" data-t="tamperBtn" hidden></button>
-
-    <div id="askBox" class="ask">
-      <h2 data-t="askTitle"></h2>
-      <div class="ask-row">
-        <input id="question" type="text" autocomplete="off">
-        <button id="mic" class="mic" aria-label="Speak"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V22h2v-3.08A7 7 0 0 0 19 12Z"/></svg></button>
-        <button id="askBtn" data-t="ask"></button>
+  <!-- 1. Start -->
+  <section id="start" class="screen start">
+    <div class="hero">
+      <h1 data-t="title"></h1>
+      <p class="lede" data-t="lede"></p>
+      <ol class="how3">
+        <li><span class="ico">📷</span><span data-t="how1"></span></li>
+        <li><span class="ico">🗣️</span><span data-t="how2"></span></li>
+        <li><span class="ico">✅</span><span data-t="how3"></span></li>
+      </ol>
+      <div id="mode" class="notice" hidden></div>
+      <div class="actions">
+        <label class="btn primary big">
+          <input id="camera" type="file" accept="image/*" capture="environment">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3 7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9Zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+          <span data-t="take"></span>
+        </label>
+        <label class="btn ghost">
+          <input id="upload" type="file" accept="image/*">
+          <span data-t="upload"></span>
+        </label>
       </div>
-      <div id="answers"></div>
+      <p class="fine" data-t="privacy"></p>
     </div>
+    <div class="examples">
+      <h2 data-t="tryExample"></h2>
+      <div id="samples" class="samples"></div>
+    </div>
+  </section>
 
-    <details class="how">
-      <summary data-t="how"></summary>
-      <ol id="trace" class="trace"></ol>
-      <p class="cost" id="cost"></p>
-    </details>
-    <details class="how">
-      <summary data-t="readText"></summary>
-      <pre id="letterText"></pre>
-    </details>
-    <button id="again" class="again" data-t="again"></button>
+  <!-- 2. Working -->
+  <section id="working" class="screen work" hidden>
+    <div class="stage"><div class="photo"><img id="workPhoto" alt=""><svg id="workOverlay" class="overlay"></svg><div class="scan"></div></div></div>
+    <div class="progress">
+      <h2 data-t="working"></h2>
+      <ol id="steps" class="steps"></ol>
+      <p class="fine" data-t="workingNote"></p>
+    </div>
+  </section>
+
+  <!-- 3. Result -->
+  <section id="result" class="screen result" hidden>
+    <aside class="stage sticky">
+      <div class="photo"><img id="resultPhoto" alt=""><svg id="overlay" class="overlay"></svg></div>
+      <p class="fine center" data-t="photoNote"></p>
+    </aside>
+
+    <div class="answer">
+      <p id="tampered" class="notice warn" data-t="tampered" hidden></p>
+      <p class="kind" id="kind"></p>
+      <p class="summary" id="summary"></p>
+
+      <div id="actionCard" class="action" hidden>
+        <div class="action-row" id="actAmountRow">
+          <span class="label" data-t="toPay"></span>
+          <span class="big" id="actAmount"></span>
+        </div>
+        <div class="action-row" id="actDateRow">
+          <span class="label" data-t="lastDate"></span>
+          <span class="big" id="actDate"></span>
+          <span class="pill" id="actDays"></span>
+        </div>
+        <p class="consequence" id="actConsequence"></p>
+        <p class="verified-chip"><span class="tick">✓</span><span data-t="matched"></span></p>
+        <button id="actSee" class="see-link"><span data-t="seeIt"></span> ↓</button>
+        <div id="actEvidence" class="evidence" hidden></div>
+        <div class="action-btns">
+          <button id="listenBtn" class="btn primary"><span class="ico">🔊</span><span data-t="listen"></span></button>
+          <button id="remindBtn" class="btn ghost"><span class="ico">📅</span><span data-t="remind"></span></button>
+          <a id="shareBtn" class="btn ghost" target="_blank" rel="noopener"><span class="ico">💬</span><span>WhatsApp</span></a>
+        </div>
+      </div>
+
+      <h2 class="sec"><span class="dot ok"></span><span id="listTitle"></span></h2>
+      <div id="verified" class="cards"></div>
+
+      <div id="cyWrap" hidden>
+        <h2 class="sec"><span class="dot cy"></span><span data-t="checkYourself"></span></h2>
+        <p class="fine" data-t="checkYourselfNote"></p>
+        <div id="checkYourself" class="cards"></div>
+      </div>
+
+      <div id="askBox" class="ask">
+        <h2 class="sec" data-t="askTitle"></h2>
+        <div id="answers" class="chat"></div>
+        <div class="ask-row">
+          <button id="mic" class="mic" aria-label="Speak"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V22h2v-3.08A7 7 0 0 0 19 12Z"/></svg></button>
+          <input id="question" type="text" autocomplete="off">
+          <button id="askBtn" class="send" aria-label="Ask"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 20.5 21 12 3 3.5v6.6l12 1.9-12 1.9v6.6Z"/></svg></button>
+        </div>
+        <p id="micHint" class="fine" data-t="micHint"></p>
+      </div>
+
+      <button id="tamperBtn" class="btn test" hidden><span data-t="tamperBtn"></span></button>
+
+      <details class="how">
+        <summary data-t="how"></summary>
+        <ol id="trace" class="trace"></ol>
+        <p class="fine" id="cost"></p>
+      </details>
+      <details class="how">
+        <summary data-t="readText"></summary>
+        <pre id="letterText"></pre>
+      </details>
+      <button id="again" class="btn ghost wide"><span data-t="again"></span></button>
+    </div>
   </section>
 </main>
 
 <footer>
   <p data-t="footer"></p>
-  <p class="small">Built for the Meta Global AI Developer Hackathon, 2026 · <a href="https://github.com/JannetEkka/chithi">code</a> · Sample letters are synthetic.</p>
+  <p class="fine">Built for the Meta Global AI Developer Hackathon 2026 with SAM 3.1, Muse Spark and Muse Voice Transcribe · <a href="https://github.com/JannetEkka/chithi">code</a> · sample letters are synthetic</p>
 </footer>
+<div id="toast" class="toast" hidden></div>
 <script src="/static/app.js"></script>
 </body>
 </html>
