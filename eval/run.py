@@ -25,6 +25,7 @@ from chithi import agent, values  # noqa: E402
 from chithi.mock import MockBackend  # noqa: E402
 
 LANGS = ["bn", "hi", "en"]
+MUST_SAY = {"total", "due_date", "pay_by"}  # generator fact names a reader must be told
 
 
 def score(result, truth) -> dict:
@@ -38,6 +39,12 @@ def score(result, truth) -> dict:
             if values.key(f) not in true_values:
                 row["wrong_shown"] += 1
                 row["wrong_examples"].append({"say": p["say"], "value": f.text})
+    # Did the reader get the facts that matter most: the total to pay and the deadline?
+    told = {values.key(f) for p in result.verified for f in values.find_values(p["say"])}
+    must = [f for f in truth["facts"] if f["name"] in MUST_SAY]
+    row["key_facts"] = len(must)
+    row["key_facts_missing"] = [f["name"] for f in must
+                                if (("date", f["value"]) if f["kind"] == "date" else values.key(values.find_numbers(f["value"])[0])) not in told]
     for p in result.check_yourself:
         row["wrong_held_back"] += sum(values.key(f) not in true_values for f in values.find_values(p["say"]))
     return row
@@ -90,7 +97,8 @@ def main():
               f"{row['wrong_shown']} wrong shown of {row['shown']}")
 
     ok = [r for r in rows if "error" not in r]
-    total = {k: sum(r[k] for r in ok) for k in ["verified", "check_yourself", "shown", "wrong_shown", "wrong_held_back"]}
+    total = {k: sum(r[k] for r in ok) for k in ["verified", "check_yourself", "shown", "wrong_shown", "wrong_held_back", "key_facts"]}
+    total["key_facts_missing"] = sum(len(r["key_facts_missing"]) for r in ok)
     total.update(letters=len(rows), errors=len(rows) - len(ok), cost_usd=round(sum(r["cost_usd"] for r in ok), 4))
     out = ROOT / "eval" / f"results-{args.backend}{'-hard' if args.photo == 'hard' else ''}{'-norepair' if args.no_repair else ''}-{len(rows)}.json"
     out.write_text(json.dumps({"total": total, "letters": rows}, ensure_ascii=False, indent=1))
@@ -99,6 +107,7 @@ def main():
     print(f"|---|---|---|---|---|---|---|---|")
     print(f"| {total['letters']} | {pts} | {total['verified']} | {total['check_yourself']} | {total['shown']} | "
           f"{total['wrong_shown']} | {total['wrong_held_back']} | ${total['cost_usd']} |")
+    print(f"\nkey facts (total to pay, deadline) told as verified: {total['key_facts'] - total['key_facts_missing']} of {total['key_facts']}")
     print(f"\nwrote {out.relative_to(ROOT)}")
 
 

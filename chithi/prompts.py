@@ -19,7 +19,7 @@ You are given the letter's text, as read from a photo. Write in {language}, in p
 Return JSON with:
 - "kind": what this letter is, in a few words, in {language}.
 - "summary": two short sentences in {language}: who sent it and what it wants.
-- "points": the things the reader must know: what to pay, by when, what happens if they don't, what to do next. 3 to 7 points, most urgent first.
+- "points": the things the reader must know, 3 to 7 points, most urgent first. If the letter has them, these come first, each as its own point: the total amount to pay now; the last date to pay or reply; what happens if they don't. Then what to do next. Leave out reference and account numbers unless the reader needs them to act.
 
 Each point has:
 - "say": one or two short sentences in {language}.

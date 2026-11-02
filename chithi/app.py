@@ -9,6 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -53,8 +54,9 @@ def _explainer() -> str:
 
 
 def _truth(sample_id: str) -> dict:
-    path = SAMPLES / f"{sample_id}.json"
-    if not sample_id.replace("-", "").isalnum() or not path.exists():
+    """A sample id is a letter id, with ".hard" for its folded, shadowed photo."""
+    path = SAMPLES / f"{sample_id.removesuffix('.hard')}.json"
+    if not sample_id.removesuffix(".hard").replace("-", "").isalnum() or not path.exists():
         raise HTTPException(404, "No such sample letter")
     return json.loads(path.read_text())
 
@@ -73,23 +75,29 @@ def health():
 
 @app.get("/api/samples")
 def samples():
+    # Two of each kind is plenty for the picker: one clean photo, one hard one.
     out = []
+    seen: dict[str, int] = defaultdict(int)
     for p in sorted(SAMPLES.glob("*.json")):
         t = json.loads(p.read_text())
-        out.append({"id": t["id"], "kind": t["kind"], "language": t["language"], "photo": f"/samples/{t['id']}.photo.jpg"})
-    # A few of each kind is plenty for the picker.
-    seen: dict[str, int] = defaultdict(int)
-    return [s for s in out if (seen.__setitem__(s["kind"], seen[s["kind"]] + 1) or seen[s["kind"]] <= 2)]
+        seen[t["kind"]] += 1
+        if seen[t["kind"]] > 2:
+            continue
+        hard = seen[t["kind"]] == 2
+        sid = t["id"] + (".hard" if hard else "")
+        out.append({"id": sid, "kind": t["kind"], "language": t["language"], "hard": hard,
+                    "photo": f"/samples/{t['id']}.{'hard' if hard else 'photo'}.jpg"})
+    return out
 
 
 @app.post("/api/explain")
-async def explain(request: Request, language: str = Form("bn"), sample_id: str = Form(""),
+async def explain(request: Request, language: str = Form("bn"), sample_id: str = Form(""), tamper: bool = Form(False),
                   photo: UploadFile | None = File(None)):
     if language not in prompts.LANGUAGES:
         raise HTTPException(400, "language must be bn, hi or en")
     if sample_id:
         truth = _truth(sample_id)
-        image = (SAMPLES / f"{sample_id}.photo.jpg").read_bytes()
+        image = (SAMPLES / (f"{truth['id']}.hard.jpg" if sample_id.endswith(".hard") else f"{sample_id}.photo.jpg")).read_bytes()
     elif photo is not None:
         truth = None
         image = await photo.read()
@@ -98,8 +106,11 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     else:
         raise HTTPException(400, "Send a photo or pick a sample letter")
 
-    if live() and sample_id and (sample_id, language) in _sample_cache:
-        return {**_sample_cache[(sample_id, language)], "cached": True}
+    if tamper and not sample_id:
+        raise HTTPException(400, "Test mode works on the sample letters only")
+    key = (sample_id, language, tamper)
+    if live() and sample_id and key in _sample_cache:
+        return {**_sample_cache[key], "cached": True}
     if live():
         _spend(request)
         backend = agent.LiveBackend(_explainer())
@@ -108,13 +119,14 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     else:
         raise HTTPException(503, "Live models aren't switched on yet; try a sample letter.")
     try:
-        res = agent.run(image, language, backend)
+        # The models take 15-30 s; keep the server free for other requests meanwhile.
+        res = await run_in_threadpool(lambda: agent.run(image, language, backend, tamper=tamper))
     except meta.MetaError as e:
         raise HTTPException(502, f"A Meta model call failed: {e}") from e
     out = res.to_dict()
     out["backend"] = backend.name
     if sample_id and backend.name == "live":
-        _sample_cache[(sample_id, language)] = out
+        _sample_cache[key] = out
     return out
 
 
@@ -129,10 +141,11 @@ async def ask(request: Request, language: str = Form("bn"), letter_text: str = F
     heard = None
     if audio is not None:
         wav = await audio.read()
-        heard = meta.transcribe(wav, language_bias=[{"bn": "bn", "hi": "hi", "en": "en"}[language]])
+        heard = await run_in_threadpool(meta.transcribe, wav, language_bias=[{"bn": "bn", "hi": "hi", "en": "en"}[language]])
         question = heard
     if not question.strip():
         raise HTTPException(400, "Ask a question, typed or spoken")
-    out = agent.answer(question, letter_text, second_reading or None, language, agent.LiveBackend(_explainer()))
+    out = await run_in_threadpool(agent.answer, question, letter_text, second_reading or None, language,
+                                  agent.LiveBackend(_explainer()))
     out["heard"] = heard
     return out

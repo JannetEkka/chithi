@@ -34,3 +34,11 @@ def test_upload_needs_live_models(client):
 
 def test_bad_sample_id(client):
     assert client.post("/api/explain", data={"sample_id": "../etc", "language": "bn"}).status_code == 404
+
+
+@pytest.mark.skipif(not (OUT / "bank-005.hard.jpg").exists(), reason="run letters/generate.py --hard-only first")
+def test_hard_sample_and_test_mode(client):
+    ids = [s["id"] for s in client.get("/api/samples").json()]
+    assert "bank-005.hard" in ids
+    d = client.post("/api/explain", data={"sample_id": "bank-005.hard", "language": "bn", "tamper": "true"}).json()
+    assert d["tampered"] and len(d["check_yourself"]) == 1

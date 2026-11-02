@@ -59,11 +59,13 @@ The test set is 40 synthetic letters ([`letters/generate.py`](letters/generate.p
 |---|---|---|---|---|---|---|---|
 | 12 | 66 | 66 | 0 | 56 | 0 | $0.52 | 13–23 s |
 
-**Harder photos** (Oct 29; 8 letters, 2 of each kind, folded, with a hard shadow across half the page, skewed, blurred and heavily compressed; `--photo hard --per-kind 2`):
+**Harder photos** (Nov 2; 8 letters, 2 of each kind, folded, with a hard shadow across half the page, skewed, blurred and heavily compressed; `--photo hard --per-kind 2`):
 
-| letters | points | verified | held back | values shown | wrong values shown | cost |
-|---|---|---|---|---|---|---|
-| 8 | 38 | 38 | 0 | 31 | 0 | $0.32 |
+| letters | points | verified | held back | values shown | wrong values shown | total and deadline told | cost |
+|---|---|---|---|---|---|---|---|
+| 8 | 40 | 40 | 0 | 27 | 0 | 16 of 16 | $0.32 |
+
+"Total and deadline told" counts whether the reader was shown, as verified, the total amount to pay and the last date. A missing point is a failure the check can't see. In one demo take the Bengali explanation of a bank letter left out exactly those two, so the prompt now asks for them first; this run is after that change. (An earlier run of the same 8 letters, before the change, showed 31 values and 0 wrong.)
 
 In both runs Muse Spark read every date and amount correctly, so every point passed and the check had nothing to hold back. That shows the readings are good on these photos; it doesn't show the check catching a real model error, since none happened. The stand-in run above is what shows the check holds back wrong values. 20 letters is a small sample, and the letters are synthetic.
 

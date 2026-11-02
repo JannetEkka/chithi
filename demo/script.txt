@@ -1,0 +1,13 @@
+This is Chithi. In India, electricity bills, bank notices and tax demands arrive in formal English or official Hindi. Many people who get them can't read that, and an AI explanation with a wrong date or amount is worse than none. Chithi explains the letter in Bengali, Hindi or English, and checks every date and amount against the letter before you see it.
+
+Here's a bank reminder, photographed badly: folded, shadowed, at an angle. SAM 3.1 finds the sheet of paper in the photo, then the tables and boxed amounts on it. Muse Spark reads the whole page. Then it reads it again, separately, in zoomed-in strips and regions. Muse Spark writes the explanation in Bengali, and for every point it quotes the letter's exact words.
+
+Every green point passed a check with no model in it. The program finds the quoted words in the letter, reads every date and rupee amount in the Bengali text, with Bengali digits, lakh and crore, and requires each one to be in those words, and in the second reading. Under each point you see the letter's own words.
+
+You can also ask out loud. I'll switch to Hindi and ask what happens if I don't pay on time. Muse Voice Transcribe turns the speech into text, and the answer goes through the same check.
+
+Now let's try to break it. This test button changes one digit of one amount in the model's explanation, the kind of slip a model makes. The check catches it. The wrong amount isn't shown as fact. It goes under "check these yourself", with the reason.
+
+Every step is on the page: which model ran, what it found, how long it took. A letter costs under five cents and takes about twenty seconds. On twenty synthetic letters, eight of them badly photographed, Chithi showed eighty-seven dates and amounts, and none were wrong. With a stand-in explainer that gets a quarter of its values wrong on purpose, all fifty-three planted errors were held back.
+
+The letters here are synthetic, Chithi doesn't give legal advice, and the README says what the check can't catch. Everything you've seen was built during this hackathon. The code and the measurements are on GitHub.
