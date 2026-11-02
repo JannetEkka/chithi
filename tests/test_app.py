@@ -42,3 +42,13 @@ def test_hard_sample_and_test_mode(client):
     assert "bank-005.hard" in ids
     d = client.post("/api/explain", data={"sample_id": "bank-005.hard", "language": "bn", "tamper": "true"}).json()
     assert d["tampered"] and len(d["check_yourself"]) == 1
+
+
+@pytest.mark.skipif(not (OUT / "elec-000.json").exists(), reason="run letters/generate.py first")
+def test_streamed_explanation_ends_with_the_result(client):
+    import json as _json
+    r = client.post("/api/explain", data={"sample_id": "elec-000", "language": "bn", "stream": "true"})
+    events = [_json.loads(line) for line in r.text.splitlines() if line.strip()]
+    kinds = [e["type"] for e in events]
+    assert kinds[0] == "page" and "step" in kinds and kinds[-1] == "result"
+    assert events[-1]["result"]["verified"]

@@ -1,8 +1,8 @@
 This is Chithi. In India, electricity bills, bank notices and tax demands arrive in formal English or official Hindi. Many people who get them can't read that, and an AI explanation with a wrong date or amount is worse than none. Chithi explains the letter in Bengali, Hindi or English, and checks every date and amount against the letter before you see it.
 
-Here's a bank reminder, photographed badly: folded, shadowed, at an angle. SAM 3.1 finds the sheet of paper in the photo, then the tables and boxed amounts on it. Muse Spark reads the whole page. Then it reads it again, separately, in zoomed-in strips and regions. Muse Spark writes the explanation in Bengali, and for every point it quotes the letter's exact words.
+Here's a bank reminder, photographed badly: folded, shadowed, at an angle. You can watch each step as it happens. SAM 3.1 finds the sheet of paper in the photo, and the tables and boxes on it. Muse Spark reads the whole page, then reads it again, separately, in zoomed-in strips. Then it writes the explanation in Bengali, quoting the letter for every point.
 
-Every green point passed a check with no model in it. The program finds the quoted words in the letter, reads every date and rupee amount in the Bengali text, with Bengali digits, lakh and crore, and requires each one to be in those words, and in the second reading. Under each point you see the letter's own words.
+At the top: what to pay, by when, and what happens if you don't. Every point passed a check with no model in it. The check finds the quoted words in the letter, and each date and rupee amount, even in Bengali digits, has to be there and in the second reading. Tap, and you see the piece of your own photo where the letter says it. You can listen to it, or send it on WhatsApp.
 
 You can also ask out loud. I'll switch to Hindi and ask what happens if I don't pay on time. Muse Voice Transcribe turns the speech into text, and the answer goes through the same check.
 

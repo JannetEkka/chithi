@@ -12,6 +12,15 @@ Built for the Meta Global AI Developer Hackathon (Cerebral Valley, October–Nov
 
 In India, these letters arrive in formal English or official Hindi. Many people who get them can't read that register, and ask a neighbour or a grandchild. An AI explanation helps, but a wrong due date or amount in it is worse than no explanation. Chithi is built so that nothing with a number in it reaches the reader unchecked.
 
+## What the reader sees
+
+1. Pick a language (বাংলা, हिन्दी, English) and photograph the letter, or try one of the examples.
+2. While it works, each step lights up as it actually finishes, and SAM 3.1's outlines appear on the photo.
+3. The answer comes first: how much to pay, the last date with the days left, and what happens if you don't. "See it in the letter" shows the piece of the photo where the letter says it.
+4. Listen to it read aloud (the phone's own Bengali or Hindi voice), add the date to a calendar with a reminder two days before, or send it on WhatsApp.
+5. Everything else that was checked is listed below. Anything that failed the check sits apart under "check these yourself", with the reason in the reader's language.
+6. Ask a follow-up question by voice or text. The answer goes through the same check.
+
 ## How it works
 
 Chithi is a verifiable agent: the model writes claims, each claim carries its evidence (the letter's own words), and a deterministic verifier decides what the reader sees.
@@ -19,7 +28,7 @@ Chithi is a verifiable agent: the model writes claims, each claim carries its ev
 1. **Find the page.** SAM 3.1 segments the sheet of paper in the photo, and Chithi crops to it.
 2. **Find the parts that matter.** SAM 3.1 finds tables, stamps and boxed text on the page.
 3. **Read the page.** Muse Spark transcribes the whole page, exactly as printed.
-4. **Read it again.** Muse Spark reads each SAM region, and the page in three overlapping strips, zoomed in. This second reading is done separately from the first.
+4. **Read it again.** Muse Spark reads each SAM region, and the page in five overlapping strips, zoomed in. This second reading is done separately from the first. It also tells the page where each value is printed: the smallest region or strip whose reading contains it. (Asking Muse Spark for pixel positions put boxes a line or more off, so the page doesn't use them.)
 5. **Explain.** Muse Spark writes 3 to 7 points in the reader's language. Each point has what to tell the reader and the exact words of the letter it rests on.
 6. **Check.** For each point, [`chithi/verify.py`](chithi/verify.py):
    - finds the quoted words in the letter (exactly, or nearly, to allow for a small reading slip) and from then on uses the letter's words, not the model's copy;

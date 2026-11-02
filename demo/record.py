@@ -76,11 +76,14 @@ with sync_playwright() as p:
     page.wait_for_selector("#result:not([hidden])", timeout=150000)
     hold(page, end)
 
-    # 3. The checked points, with the letter's own words.
+    # 3. The answer first, and the proof in the photo.
     end = scene(2)
-    page.wait_for_timeout(1500)
-    scroll_to(page, "#kind")
-    glide(page, 700, 10)
+    page.wait_for_timeout(9000)
+    page.click("#actSee")
+    page.wait_for_timeout(1200)
+    glide(page, 420, 5)
+    page.wait_for_timeout(2500)
+    page.click("#verified .card >> nth=0")
     hold(page, end)
 
     # 4. A spoken question in Hindi.
