@@ -1,13 +1,15 @@
 {
  "total": {
-  "verified": 38,
+  "verified": 40,
   "check_yourself": 0,
-  "shown": 31,
+  "shown": 27,
   "wrong_shown": 0,
   "wrong_held_back": 0,
+  "key_facts": 16,
+  "key_facts_missing": 0,
   "letters": 8,
   "errors": 0,
-  "cost_usd": 0.3209
+  "cost_usd": 0.3245
  },
  "letters": [
   {
@@ -19,115 +21,117 @@
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0374,
-   "seconds": 15.1,
+   "cost_usd": 0.0435,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 26.2,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 1871
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'rectangle': 0 found",
-     "ms": 1397
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'stamp': 0 found",
-     "ms": 1677
+     "ms": 1418
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'table': 0 found",
-     "ms": 2028
+     "ms": 1235
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1463
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1521
     },
     {
      "step": "read_page",
      "model": "muse-spark-1.3",
      "detail": "944 characters read",
-     "ms": 2580,
+     "ms": 3186,
      "tokens": {
       "in": 1620,
-      "out": 588,
-      "reasoning": 317
+      "out": 559,
+      "reasoning": 288
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 585, 1181, 964): 460 characters",
+     "ms": 3680,
+     "tokens": {
+      "in": 965,
+      "out": 576,
+      "reasoning": 450
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 0, 1181, 379): 194 characters",
+     "ms": 5260,
+     "tokens": {
+      "in": 965,
+      "out": 772,
+      "reasoning": 699
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 263, 1181, 701): 710 characters",
-     "ms": 2955,
+     "ms": 16170,
      "tokens": {
       "in": 1115,
-      "out": 447,
-      "reasoning": 239
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 585, 1181, 964): 457 characters",
-     "ms": 4354,
-     "tokens": {
-      "in": 965,
-      "out": 466,
-      "reasoning": 342
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 0, 1181, 379): 193 characters",
-     "ms": 5151,
-     "tokens": {
-      "in": 965,
-      "out": 571,
-      "reasoning": 499
+      "out": 661,
+      "reasoning": 453
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
      "detail": "5 points in Bengali (বাংলা, Bengali script)",
-     "ms": 10550,
+     "ms": 21531,
      "tokens": {
-      "in": 784,
-      "out": 2776,
-      "reasoning": 2368
+      "in": 823,
+      "out": 3707,
+      "reasoning": 3326
      }
     },
     {
      "step": "check",
      "model": "deterministic",
      "detail": "5 verified, 0 failed",
-     "ms": 6,
+     "ms": 7,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "আপনাকে ₹6,760.00 দিতে বলা হয়েছে।",
+     "say": "আপনাকে এখন ₹6,760.00 দিতে হবে।",
      "evidence": "You are requested to pay Rs. 6,760.00 on or before 22nd October 2026 to regularise the account.",
      "topic": "amount"
     },
     {
-     "say": "22/10/2026 এর মধ্যে টাকা জমা দিতে বলা হয়েছে।",
+     "say": "এই টাকা 22/10/2026 এর মধ্যে দিতে হবে।",
      "evidence": "You are requested to pay Rs. 6,760.00 on or before 22nd October 2026 to regularise the account.",
      "topic": "deadline"
     },
     {
-     "say": "08/11/2026 তারিখে হিসাবটি খারাপ ঋণ হিসাবে ধরা হবে।",
-     "evidence": "the account will be classified as a Non-Performing Asset (NPA) on 8th\nNovember 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
+     "say": "টাকা না দিলে 08/11/2026 এ হিসাব খারাপ হয়ে যাবে।",
+     "evidence": "Please note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 8th\nNovember 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
      "topic": "consequence"
     },
     {
-     "say": "প্রতি মাসের কিস্তি ₹3,250.00 করে বাকি আছে।",
-     "evidence": "This is to inform you that 2 EMI(s) of Rs. 3,250.00 each in your above loan account are overdue since 10th August\n2026.",
+     "say": "10/08/2026 থেকে আপনার কিস্তি বাকি আছে।",
+     "evidence": "are overdue since 10th August\n2026.",
      "topic": "other"
     },
     {
@@ -143,124 +147,126 @@
    "language": "hi",
    "verified": 5,
    "check_yourself": 0,
-   "shown": 4,
+   "shown": 3,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0429,
-   "seconds": 27.0,
+   "cost_usd": 0.0418,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 27.1,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 1583
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'table': 0 found",
-     "ms": 904
+     "ms": 1166
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'stamp': 0 found",
-     "ms": 1260
+     "ms": 954
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1162
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'rectangle': 0 found",
-     "ms": 1445
+     "ms": 1358
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 0, 1150, 357): 192 characters",
-     "ms": 2516,
+     "ms": 4389,
      "tokens": {
       "in": 915,
-      "out": 428,
-      "reasoning": 356
+      "out": 535,
+      "reasoning": 463
      }
     },
     {
      "step": "read_page",
      "model": "muse-spark-1.3",
      "detail": "906 characters read",
-     "ms": 2842,
+     "ms": 4713,
      "tokens": {
       "in": 1501,
-      "out": 541,
-      "reasoning": 276
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 552, 1150, 909): 451 characters",
-     "ms": 3019,
-     "tokens": {
-      "in": 915,
-      "out": 492,
-      "reasoning": 369
+      "out": 555,
+      "reasoning": 290
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 248, 1150, 661): 749 characters",
-     "ms": 3679,
+     "ms": 4707,
      "tokens": {
       "in": 1065,
-      "out": 797,
-      "reasoning": 575
+      "out": 1032,
+      "reasoning": 810
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 552, 1150, 909): 451 characters",
+     "ms": 17921,
+     "tokens": {
+      "in": 915,
+      "out": 587,
+      "reasoning": 464
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
      "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
-     "ms": 22549,
+     "ms": 21188,
      "tokens": {
-      "in": 778,
-      "out": 3965,
-      "reasoning": 3121
+      "in": 817,
+      "out": 3247,
+      "reasoning": 2852
      }
     },
     {
      "step": "check",
      "model": "deterministic",
      "detail": "5 verified, 0 failed",
-     "ms": 6,
+     "ms": 5,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "आपको ₹10,140.00 भरना है।",
+     "say": "आपको अभी कुल ₹ 10,140.00 देना है।",
      "evidence": "You are requested to pay ₹ 10,140.00 on or before 23.10.2026 to regularise the account.",
      "topic": "amount"
     },
     {
-     "say": "पैसा 23/10/2026 तक भर दें।",
+     "say": "पैसा 23/10/2026 तक जमा करना है।",
      "evidence": "You are requested to pay ₹ 10,140.00 on or before 23.10.2026 to regularise the account.",
      "topic": "deadline"
     },
     {
-     "say": "एक किस्त ₹4,875.00 की है।",
-     "evidence": "2 EMI(s) of ₹ 4,875.00 each in your above loan account are overdue since 13.08.2026.",
-     "topic": "amount"
-    },
-    {
-     "say": "11/11/2026 को खाता खराब खाते में डाला जाएगा।",
-     "evidence": "the account will be classified as a Non-Performing Asset (NPA) on\n11.11.2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
+     "say": "पैसा नहीं दिया तो 11/11/2026 को खाता एनपीए हो जाएगा।",
+     "evidence": "Please note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on\n11.11.2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
      "topic": "consequence"
     },
     {
-     "say": "कुछ पूछना हो तो ब्रांच मैनेजर से मिलें।",
-     "evidence": "Yours faithfully,\nBranch Manager",
+     "say": "इससे आपकी साख खराब होगी और बैंक कानून से पैसा वसूल कर सकता है।",
+     "evidence": "11.11.2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.",
+     "topic": "consequence"
+    },
+    {
+     "say": "अगर आपने पहले ही पैसा दे दिया है तो इस चिट्ठी को भूल जाएं।",
+     "evidence": "If you have already paid, please ignore this letter.",
      "topic": "action"
     }
    ],
@@ -271,120 +277,122 @@
    "language": "en",
    "verified": 5,
    "check_yourself": 0,
-   "shown": 5,
+   "shown": 4,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0419,
-   "seconds": 12.4,
+   "cost_usd": 0.0394,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 20.8,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 713
+     "ms": 1043
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'stamp': 0 found",
-     "ms": 1335
+     "ms": 1225
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'table': 0 found",
-     "ms": 1424
+     "ms": 1553
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'rectangle': 0 found",
-     "ms": 1623
+     "ms": 2315
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 0, 1173, 390): 322 characters",
-     "ms": 3317,
+     "detail": "strip at (0, 0, 1173, 390): 325 characters",
+     "ms": 3662,
      "tokens": {
       "in": 965,
-      "out": 701,
-      "reasoning": 597
+      "out": 688,
+      "reasoning": 581
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 601, 1173, 991): 471 characters",
+     "ms": 4617,
+     "tokens": {
+      "in": 965,
+      "out": 806,
+      "reasoning": 671
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 271, 1173, 720): 510 characters",
+     "ms": 5543,
+     "tokens": {
+      "in": 1115,
+      "out": 1051,
+      "reasoning": 872
      }
     },
     {
      "step": "read_page",
      "model": "muse-spark-1.3",
      "detail": "897 characters read",
-     "ms": 3434,
+     "ms": 5839,
      "tokens": {
       "in": 1550,
-      "out": 710,
-      "reasoning": 441
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 601, 1173, 991): 468 characters",
-     "ms": 4856,
-     "tokens": {
-      "in": 965,
-      "out": 1040,
-      "reasoning": 906
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 271, 1173, 720): 515 characters",
-     "ms": 5889,
-     "tokens": {
-      "in": 1115,
-      "out": 1288,
-      "reasoning": 1105
+      "out": 951,
+      "reasoning": 682
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
      "detail": "5 points in English",
-     "ms": 8139,
+     "ms": 13924,
      "tokens": {
-      "in": 746,
-      "out": 2196,
-      "reasoning": 1873
+      "in": 785,
+      "out": 1836,
+      "reasoning": 1526
      }
     },
     {
      "step": "check",
      "model": "deterministic",
      "detail": "5 verified, 0 failed",
-     "ms": 12,
+     "ms": 9,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "You have to pay ₹ 3,933.84.",
+     "say": "You have to pay ₹ 3,933.84 now.",
      "evidence": "NET AMOUNT PAYABLE | ₹ 3,933.84",
      "topic": "amount"
     },
     {
-     "say": "Pay by 10/09/2026.",
+     "say": "Pay before 10/09/2026.",
      "evidence": "Pay by Due Date: 10/09/2026",
      "topic": "deadline"
     },
     {
-     "say": "If you pay late, you have to pay ₹ 4,012.52, which includes ₹ 78.68 extra.",
-     "evidence": "Amount payable after due date: ₹ 4,012.52 (includes late payment surcharge of ₹ 78.68)",
+     "say": "If you do not pay, your light can be cut after 25/09/2026.",
+     "evidence": "If the bill remains unpaid, supply is liable to be disconnected after 25/09/2026 under the applicable supply code,",
      "topic": "consequence"
     },
     {
-     "say": "Your light can be cut after 25/09/2026 if you do not pay.",
-     "evidence": "If the bill remains unpaid, supply is liable to be disconnected after 25/09/2026 under the applicable supply code,",
-     "topic": "consequence"
+     "say": "If you pay late, you have to pay ₹ 4,012.52.",
+     "evidence": "Amount payable after due date: ₹ 4,012.52 (includes late payment surcharge of ₹ 78.68)",
+     "topic": "amount"
     },
     {
      "say": "You can pay online, at a cash counter, or at an authorised collection centre.",
@@ -403,86 +411,88 @@
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0414,
-   "seconds": 13.6,
+   "cost_usd": 0.0393,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 22.3,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 935
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'table': 0 found",
-     "ms": 1076
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'stamp': 0 found",
-     "ms": 1280
+     "ms": 1509
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'rectangle': 0 found",
-     "ms": 1628
+     "ms": 1092
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1303
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1527
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 596, 1185, 983): 478 characters",
-     "ms": 2496,
+     "ms": 3334,
      "tokens": {
       "in": 965,
-      "out": 475,
-      "reasoning": 345
+      "out": 306,
+      "reasoning": 176
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 268, 1185, 715): 472 characters",
+     "ms": 4703,
+     "tokens": {
+      "in": 1115,
+      "out": 665,
+      "reasoning": 493
      }
     },
     {
      "step": "read_page",
      "model": "muse-spark-1.3",
      "detail": "886 characters read",
-     "ms": 3116,
+     "ms": 5742,
      "tokens": {
       "in": 1585,
-      "out": 599,
-      "reasoning": 331
+      "out": 813,
+      "reasoning": 545
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 0, 1185, 387): 306 characters",
-     "ms": 4172,
+     "detail": "strip at (0, 0, 1185, 387): 328 characters",
+     "ms": 7830,
      "tokens": {
       "in": 965,
-      "out": 764,
-      "reasoning": 657
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 268, 1185, 715): 474 characters",
-     "ms": 5427,
-     "tokens": {
-      "in": 1115,
-      "out": 1166,
-      "reasoning": 994
+      "out": 1041,
+      "reasoning": 923
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
      "detail": "5 points in Bengali (বাংলা, Bengali script)",
-     "ms": 9452,
+     "ms": 15054,
      "tokens": {
-      "in": 781,
-      "out": 2782,
-      "reasoning": 2444
+      "in": 820,
+      "out": 2459,
+      "reasoning": 2106
      }
     },
     {
@@ -495,27 +505,27 @@
    ],
    "verified_points": [
     {
-     "say": "আপনাকে ₹ 3,585.87 দিতে হবে।",
+     "say": "আপনাকে এখন ₹ 3,585.87 দিতে হবে।",
      "evidence": "NET AMOUNT PAYABLE | ₹ 3,585.87",
      "topic": "amount"
     },
     {
-     "say": "06/11/2026 এর আগে টাকা জমা দিন।",
+     "say": "06/11/2026 তারিখের মধ্যে টাকা জমা দিন।",
      "evidence": "Pay by Due Date: 06-11-2026",
      "topic": "deadline"
     },
     {
-     "say": "দেরি হলে ₹ 3,657.59 দিতে হবে।",
+     "say": "দেরি করে দিলে ₹ 3,657.59 দিতে হবে।",
      "evidence": "Amount payable after due date: ₹ 3,657.59 (includes late payment surcharge of ₹ 71.72)",
      "topic": "amount"
     },
     {
-     "say": "21/11/2026 এর পর বিজলি লাইন কেটে দিতে পারে।",
+     "say": "টাকা না দিলে 21/11/2026 এর পর আপনার লাইন কেটে দিতে পারে।",
      "evidence": "If the bill remains unpaid, supply is liable to be disconnected after 21-11-2026 under the applicable supply code,",
      "topic": "consequence"
     },
     {
-     "say": "টাকা অনলাইনে বা টাকা নেওয়ার জায়গায় গিয়ে দিন।",
+     "say": "টাকা অনলাইনে বা ক্যাশ কাউন্টারে গিয়ে জমা দিন।",
      "evidence": "Pay online, at any cash counter, or through authorised collection centres.",
      "topic": "action"
     }
@@ -525,138 +535,135 @@
   {
    "id": "ptax-003",
    "language": "hi",
-   "verified": 5,
+   "verified": 4,
    "check_yourself": 0,
    "shown": 2,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0397,
-   "seconds": 20.1,
+   "cost_usd": 0.0394,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 14.2,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 1245
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'table': 0 found",
-     "ms": 832
+     "ms": 1664
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'rectangle': 1 found",
-     "ms": 1118
+     "ms": 1229
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'stamp': 0 found",
-     "ms": 1328
+     "ms": 1570
     },
     {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 213, 1130, 567): 517 characters",
-     "ms": 2271,
-     "tokens": {
-      "in": 965,
-      "out": 627,
-      "reasoning": 433
-     }
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1762
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 0, 1130, 307): 114 characters",
-     "ms": 2461,
+     "ms": 2371,
      "tokens": {
       "in": 815,
-      "out": 216,
-      "reasoning": 157
+      "out": 310,
+      "reasoning": 251
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 213, 1130, 567): 517 characters",
+     "ms": 3979,
+     "tokens": {
+      "in": 965,
+      "out": 641,
+      "reasoning": 447
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 473, 1130, 780): 294 characters",
-     "ms": 3301,
+     "ms": 4121,
      "tokens": {
       "in": 815,
-      "out": 514,
-      "reasoning": 413
+      "out": 481,
+      "reasoning": 380
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "665 characters read",
+     "ms": 5126,
+     "tokens": {
+      "in": 1263,
+      "out": 716,
+      "reasoning": 469
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "rectangle at (15, 13, 1115, 769): 665 characters",
-     "ms": 2502,
+     "ms": 5313,
      "tokens": {
       "in": 1815,
-      "out": 585,
-      "reasoning": 338
-     }
-    },
-    {
-     "step": "read_page",
-     "model": "muse-spark-1.3",
-     "detail": "659 characters read",
-     "ms": 10201,
-     "tokens": {
-      "in": 1263,
-      "out": 643,
-      "reasoning": 396
+      "out": 837,
+      "reasoning": 590
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
-     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
-     "ms": 8640,
+     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 7345,
      "tokens": {
-      "in": 760,
-      "out": 2507,
-      "reasoning": 2215
+      "in": 799,
+      "out": 2040,
+      "reasoning": 1773
      }
     },
     {
      "step": "check",
      "model": "deterministic",
-     "detail": "5 verified, 0 failed",
-     "ms": 8,
+     "detail": "4 verified, 0 failed",
+     "ms": 6,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "आपको कुल ₹8,118.00 देना है।",
-     "evidence": "कुल देय राशि ₹8,118.00 है।",
+     "say": "आपको अभी ₹8,118.00 देना है।",
+     "evidence": "कुल देय राशि ₹8,118.00 है ।",
      "topic": "amount"
     },
     {
-     "say": "पैसे 02/11/2026 तक दे दें।",
-     "evidence": "कृपया कुल राशि का भुगतान 02/11/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें।",
+     "say": "02/11/2026 तक पैसा जमा कर दें।",
+     "evidence": "कृपया कुल राशि का भुगतान 02/11/2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें ।",
      "topic": "deadline"
     },
     {
-     "say": "समय पर पैसे न दिए तो कुर्की हो सकती है।",
-     "evidence": "कुर्की की कार्यवाही की जा सकती है।",
+     "say": "समय पर पैसा नहीं दिया तो कुर्की हो सकती है।",
+     "evidence": "कुर्की की कार्यवाही की जा सकती है ।",
      "topic": "consequence"
     },
     {
-     "say": "पैसे नगर परिषद कार्यालय में या ऑनलाइन जमा करें।",
-     "evidence": "नगर परिषद कार्यालय में या ऑनलाइन करें।",
+     "say": "अगर आपने पहले ही पैसा दे दिया है तो इस कागज को भूल जाएं।",
+     "evidence": "यदि आपने भुगतान कर दिया है, तो इस सूचना को अनदेखा करें ।",
      "topic": "action"
-    },
-    {
-     "say": "अगर आपने पैसे पहले ही दे दिए हैं तो कुछ न करें।",
-     "evidence": "यदि आपने भुगतान कर दिया है, तो इस सूचना को अनदेखा करें।",
-     "topic": "other"
     }
    ],
    "check_yourself_points": []
@@ -664,127 +671,134 @@
   {
    "id": "ptax-007",
    "language": "en",
-   "verified": 5,
+   "verified": 6,
    "check_yourself": 0,
-   "shown": 6,
+   "shown": 3,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.039,
-   "seconds": 19.0,
+   "cost_usd": 0.0451,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 32.2,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 885
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'stamp': 0 found",
-     "ms": 1196
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'rectangle': 0 found",
-     "ms": 1347
+     "ms": 1143
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'table': 0 found",
-     "ms": 1650
+     "ms": 1333
     },
     {
-     "step": "read_page",
-     "model": "muse-spark-1.3",
-     "detail": "682 characters read",
-     "ms": 2818,
-     "tokens": {
-      "in": 1405,
-      "out": 723,
-      "reasoning": 471
-     }
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'stamp': 0 found",
+     "ms": 1476
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1584
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 226, 1189, 600): 568 characters",
-     "ms": 2922,
+     "detail": "strip at (0, 0, 1189, 325): 141 characters",
+     "ms": 3187,
      "tokens": {
-      "in": 965,
-      "out": 612,
+      "in": 815,
+      "out": 467,
       "reasoning": 400
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 0, 1189, 325): 140 characters",
-     "ms": 3182,
+     "detail": "strip at (0, 501, 1189, 826): 266 characters",
+     "ms": 4755,
      "tokens": {
       "in": 815,
-      "out": 432,
-      "reasoning": 366
+      "out": 641,
+      "reasoning": 549
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 501, 1189, 826): 300 characters",
-     "ms": 3913,
+     "detail": "strip at (0, 226, 1189, 600): 562 characters",
+     "ms": 7760,
      "tokens": {
-      "in": 815,
-      "out": 647,
-      "reasoning": 543
+      "in": 965,
+      "out": 1193,
+      "reasoning": 981
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "676 characters read",
+     "ms": 8438,
+     "tokens": {
+      "in": 1405,
+      "out": 1276,
+      "reasoning": 1024
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
-     "detail": "5 points in English",
-     "ms": 15245,
+     "detail": "6 points in English",
+     "ms": 22547,
      "tokens": {
-      "in": 729,
-      "out": 3019,
-      "reasoning": 2224
+      "in": 768,
+      "out": 3278,
+      "reasoning": 2278
      }
     },
     {
      "step": "check",
      "model": "deterministic",
-     "detail": "5 verified, 0 failed",
-     "ms": 6,
+     "detail": "6 verified, 0 failed",
+     "ms": 9,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "You have to pay ₹14,260.00.",
-     "evidence": "कुल देय राशि ₹14,260.00 है ।",
+     "say": "You have to pay ₹14,260.00 in total now.",
+     "evidence": "कुल देय राशि ₹14,260.00 है।",
      "topic": "amount"
     },
     {
-     "say": "Pay this money by 03/10/2026.",
-     "evidence": "कृपया कुल राशि का भुगतान 3 अक्टूबर 2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें ।",
+     "say": "Pay it by 03/10/2026.",
+     "evidence": "कृपया कुल राशि का भुगतान 3 अक्टूबर 2026 तक नगर परिषद कार्यालय में या ऑनलाइन करें।",
      "topic": "deadline"
     },
     {
-     "say": "If you do not pay in time, the office can take action to take your things.",
-     "evidence": "कुर्की की कार्यवाही की जा सकती है ।",
+     "say": "If you do not pay in time, attachment action can be started.",
+     "evidence": "निर्धारित तिथि तक भुगतान न करने पर नियमानुसार\nकुर्की की कार्यवाही की जा सकती है।",
      "topic": "consequence"
     },
     {
-     "say": "Your house tax for 2026-27 is ₹12,964.00.",
-     "evidence": "वित्तीय वर्ष 2026-27 के लिए आपकी संपत्ति पर ₹12,964.00 का संपत्ति कर बकाया है ।",
-     "topic": "amount"
+     "say": "Pay at the council office or online.",
+     "evidence": "नगर परिषद कार्यालय में या ऑनलाइन करें।",
+     "topic": "action"
     },
     {
      "say": "Late fee added is ₹1,296.00.",
-     "evidence": "₹1,296.00 विलंब शुल्क जोड़ा गया है ।",
-     "topic": "amount"
+     "evidence": "₹1,296.00 विलंब शुल्क जोड़ा गया है।",
+     "topic": "other"
+    },
+    {
+     "say": "If you already paid, ignore this notice.",
+     "evidence": "यदि आपने भुगतान कर दिया है, तो इस सूचना को अनदेखा करें।",
+     "topic": "other"
     }
    ],
    "check_yourself_points": []
@@ -792,122 +806,129 @@
   {
    "id": "tax-002",
    "language": "bn",
-   "verified": 4,
+   "verified": 5,
    "check_yourself": 0,
    "shown": 3,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.0426,
-   "seconds": 15.2,
+   "cost_usd": 0.0362,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 26.0,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 1435
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'rectangle': 0 found",
-     "ms": 939
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'table': 0 found",
-     "ms": 1108
+     "ms": 1225
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'stamp': 0 found",
-     "ms": 1609
+     "ms": 1106
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1155
+    },
+    {
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'rectangle': 0 found",
+     "ms": 1632
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 0, 1154, 398): 224 characters",
-     "ms": 2741,
+     "ms": 1946,
      "tokens": {
       "in": 1015,
-      "out": 492,
-      "reasoning": 403
+      "out": 213,
+      "reasoning": 124
      }
     },
     {
      "step": "read_page",
      "model": "muse-spark-1.3",
      "detail": "876 characters read",
-     "ms": 4537,
+     "ms": 3590,
      "tokens": {
       "in": 1591,
-      "out": 883,
-      "reasoning": 623
+      "out": 549,
+      "reasoning": 289
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 276, 1154, 735): 541 characters",
-     "ms": 4866,
-     "tokens": {
-      "in": 1165,
-      "out": 983,
-      "reasoning": 809
-     }
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 613, 1154, 1011): 466 characters",
-     "ms": 6433,
+     "detail": "strip at (0, 613, 1154, 1011): 464 characters",
+     "ms": 4228,
      "tokens": {
       "in": 1015,
-      "out": 1489,
-      "reasoning": 1356
+      "out": 620,
+      "reasoning": 488
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
-     "detail": "4 points in Bengali (বাংলা, Bengali script)",
-     "ms": 9212,
+     "detail": "5 points in Bengali (বাংলা, Bengali script)",
+     "ms": 12810,
      "tokens": {
-      "in": 773,
-      "out": 2195,
-      "reasoning": 1921
+      "in": 812,
+      "out": 2442,
+      "reasoning": 2114
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 276, 1154, 735): 540 characters",
+     "ms": 24721,
+     "tokens": {
+      "in": 1165,
+      "out": 704,
+      "reasoning": 531
      }
     },
     {
      "step": "check",
      "model": "deterministic",
-     "detail": "4 verified, 0 failed",
+     "detail": "5 verified, 0 failed",
      "ms": 3,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "আপনাকে মোট ₹10,781.00 দিতে হবে।",
+     "say": "আপনাকে এখন মোট ₹10,781.00 দিতে হবে।",
      "evidence": "Total sum payable | INR 10,781.00",
      "topic": "amount"
     },
     {
-     "say": "10/11/2026 তারিখের মধ্যে টাকা জমা দিন।",
+     "say": "10/11/2026 তারিখের মধ্যে টাকা দিন।",
      "evidence": "that is on or before 10-NOV-2026.",
      "topic": "deadline"
     },
     {
-     "say": "দাবি ভুল মনে হলে 26/10/2026 তারিখের মধ্যে কাগজ সহ জবাব দিন।",
+     "say": "আপত্তি থাকলে 26/10/2026 তারিখের মধ্যে কাগজ জমা দিন।",
      "evidence": "you may submit your response with documents by 26-OCT-2026.",
-     "topic": "action"
+     "topic": "deadline"
     },
     {
-     "say": "সময়ে টাকা না দিলে আরও সুদ লাগবে আর আদায়ের ব্যবস্থা নেওয়া হবে।",
-     "evidence": "If the amount is not paid within the period specified, further interest will be charged and steps may be taken to",
+     "say": "সময়ে টাকা না দিলে আরও সুদ লাগবে আর টাকা আদায়ের ব্যবস্থা নেওয়া হবে।",
+     "evidence": "If the amount is not paid within the period specified, further interest will be charged and steps may be taken to\nrecover it.",
      "topic": "consequence"
+    },
+    {
+     "say": "কিছু না বুঝলে ট্যাক্স অফিসারের সঙ্গে যোগাযোগ করুন।",
+     "evidence": "TAX OFFICER, WARD 7",
+     "topic": "action"
     }
    ],
    "check_yourself_points": []
@@ -915,122 +936,129 @@
   {
    "id": "tax-006",
    "language": "hi",
-   "verified": 4,
+   "verified": 5,
    "check_yourself": 0,
-   "shown": 3,
+   "shown": 4,
    "wrong_shown": 0,
    "wrong_held_back": 0,
    "wrong_examples": [],
-   "cost_usd": 0.036,
-   "seconds": 15.9,
+   "cost_usd": 0.0398,
+   "key_facts": 2,
+   "key_facts_missing": [],
+   "seconds": 23.1,
    "trace": [
     {
      "step": "find_page",
      "model": "sam-3.1",
      "detail": "'sheet of paper': 1 found, cropped to it",
-     "ms": 1702
-    },
-    {
-     "step": "find_regions",
-     "model": "sam-3.1",
-     "detail": "'table': 0 found",
-     "ms": 964
+     "ms": 1226
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'stamp': 0 found",
-     "ms": 1353
-    },
-    {
-     "step": "read_again",
-     "model": "muse-spark-1.3",
-     "detail": "strip at (0, 0, 1197, 383): 251 characters",
-     "ms": 1962,
-     "tokens": {
-      "in": 915,
-      "out": 239,
-      "reasoning": 140
-     }
+     "ms": 1203
     },
     {
      "step": "find_regions",
      "model": "sam-3.1",
      "detail": "'rectangle': 0 found",
-     "ms": 2373
+     "ms": 1211
     },
     {
-     "step": "read_page",
-     "model": "muse-spark-1.3",
-     "detail": "881 characters read",
-     "ms": 2765,
-     "tokens": {
-      "in": 1620,
-      "out": 632,
-      "reasoning": 369
-     }
+     "step": "find_regions",
+     "model": "sam-3.1",
+     "detail": "'table': 0 found",
+     "ms": 1507
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
-     "detail": "strip at (0, 590, 1197, 973): 458 characters",
-     "ms": 3472,
+     "detail": "strip at (0, 0, 1197, 383): 251 characters",
+     "ms": 2885,
      "tokens": {
       "in": 915,
-      "out": 751,
-      "reasoning": 615
+      "out": 257,
+      "reasoning": 158
      }
     },
     {
      "step": "read_again",
      "model": "muse-spark-1.3",
      "detail": "strip at (0, 266, 1197, 707): 612 characters",
-     "ms": 4834,
+     "ms": 4436,
      "tokens": {
       "in": 1065,
-      "out": 825,
-      "reasoning": 635
+      "out": 687,
+      "reasoning": 497
+     }
+    },
+    {
+     "step": "read_again",
+     "model": "muse-spark-1.3",
+     "detail": "strip at (0, 590, 1197, 973): 446 characters",
+     "ms": 4917,
+     "tokens": {
+      "in": 915,
+      "out": 797,
+      "reasoning": 667
+     }
+    },
+    {
+     "step": "read_page",
+     "model": "muse-spark-1.3",
+     "detail": "881 characters read",
+     "ms": 5482,
+     "tokens": {
+      "in": 1620,
+      "out": 861,
+      "reasoning": 598
      }
     },
     {
      "step": "explain",
      "model": "muse-spark-1.3",
-     "detail": "4 points in Hindi (हिन्दी, Devanagari script)",
-     "ms": 11361,
+     "detail": "5 points in Hindi (हिन्दी, Devanagari script)",
+     "ms": 16400,
      "tokens": {
-      "in": 776,
-      "out": 2125,
-      "reasoning": 1863
+      "in": 815,
+      "out": 2838,
+      "reasoning": 2529
      }
     },
     {
      "step": "check",
      "model": "deterministic",
-     "detail": "4 verified, 0 failed",
-     "ms": 5,
+     "detail": "5 verified, 0 failed",
+     "ms": 7,
      "failures": []
     }
    ],
    "verified_points": [
     {
-     "say": "आपको कुल ₹54,758.00 देना है।",
+     "say": "आपको अभी ₹54,758.00 देने हैं।",
      "evidence": "Total sum payable | INR 54,758.00",
      "topic": "amount"
     },
     {
-     "say": "पैसे 09/11/2026 तक दे दें।",
+     "say": "पैसे 09/11/2026 तक जमा कर दें।",
      "evidence": "that is on or before 09-NOV-2026.",
      "topic": "deadline"
     },
     {
-     "say": "अगर आपको यह मांग गलत लगती है तो 25/10/2026 तक कागज के साथ जवाब दें।",
+     "say": "अगर मांग गलत लगती है तो 25/10/2026 तक कागजों के साथ जवाब दें।",
      "evidence": "you may submit your response with documents by 25-OCT-2026.",
-     "topic": "action"
+     "topic": "deadline"
     },
     {
-     "say": "समय पर पैसा नहीं दिया तो और ब्याज लगेगा और वसूली हो सकती है।",
+     "say": "समय पर पैसे न दिए तो और ब्याज लगेगा और वसूली हो सकती है।",
      "evidence": "If the amount is not paid within the period specified, further interest will be charged and steps may be taken to\nrecover it.",
      "topic": "consequence"
+    },
+    {
+     "say": "मदद के लिए टैक्स ऑफिसर, वार्ड 7 से संपर्क करें।",
+     "evidence": "TAX OFFICER, WARD 7",
+     "topic": "action"
     }
    ],
    "check_yourself_points": []
