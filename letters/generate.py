@@ -286,12 +286,48 @@ def photograph(src: Path, dst: Path, r: random.Random) -> None:
     table.save(dst, quality=r.randint(70, 88))
 
 
+def photograph_hard(src: Path, dst: Path, r: random.Random) -> None:
+    """A worse phone photo: a fold, a hard shadow across part of the page, a
+    skewed angle, blur, and heavy compression. Still readable by a person."""
+    from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+
+    page = Image.open(src).convert("RGB")
+    w, h = page.size
+    d = ImageDraw.Draw(page, "RGBA")
+    # A fold: a crease line, and the paper below it a little darker.
+    y = r.randint(int(0.3 * h), int(0.7 * h))
+    d.rectangle([0, y, w, h], fill=(0, 0, 0, r.randint(12, 28)))
+    d.line([0, y, w, y + r.randint(-8, 8)], fill=(90, 90, 90, 150), width=3)
+    # A hard shadow (a hand or the phone) across one side of the page.
+    x = r.randint(int(0.45 * w), int(0.75 * w))
+    d.polygon([(x, 0), (w, 0), (w, h), (x - r.randint(80, 240), h)], fill=(20, 18, 15, r.randint(70, 110)))
+    # On a table, photographed at an angle.
+    pad = int(0.1 * max(w, h))
+    table = Image.new("RGB", (w + 2 * pad, h + 2 * pad), r.choice([(120, 84, 52), (90, 90, 95), (160, 130, 95)]))
+    table.paste(page, (pad, pad))
+    W, H = table.size
+    j = lambda: r.randint(0, int(0.07 * W))
+    table = table.transform((W, H), Image.QUAD, (j(), j(), j(), H - j(), W - j(), H - j(), W - j(), j()), Image.BICUBIC)
+    table = table.rotate(r.uniform(-7, 7), resample=Image.BICUBIC, fillcolor=(60, 55, 50))
+    table = ImageEnhance.Brightness(table).enhance(r.uniform(0.7, 0.95))
+    table = table.filter(ImageFilter.GaussianBlur(r.uniform(1.0, 1.6)))
+    table.thumbnail((1200, 1200))
+    table.save(dst, quality=r.randint(45, 60))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=40, help="how many letters")
     ap.add_argument("--seed", type=int, default=2026)
+    ap.add_argument("--hard-only", action="store_true", help="only add <id>.hard.jpg photos for the existing pages")
     args = ap.parse_args()
     r = random.Random(args.seed)
+    if args.hard_only:
+        pages = sorted(p for p in OUT.glob("*.png"))
+        for p in pages:
+            photograph_hard(p, OUT / f"{p.stem}.hard.jpg", r)
+        print(f"wrote {len(pages)} hard photos to {OUT}")
+        return
     OUT.mkdir(exist_ok=True)
     letters = [KINDS[i % len(KINDS)](r, i) for i in range(args.n)]
     render(letters)
