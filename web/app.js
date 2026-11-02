@@ -12,6 +12,8 @@ const T = {
     footer: "Chithi আইনি পরামর্শ দেয় না। সন্দেহ হলে চিঠি যিনি পাঠিয়েছেন তাঁর সঙ্গে যোগাযোগ করুন।",
     steps: ["ছবিতে চিঠি খোঁজা (SAM 3.1)", "গুরুত্বপূর্ণ অংশ খোঁজা (SAM 3.1)", "চিঠি পড়া (Muse Spark)", "আবার পড়া, কাছ থেকে", "বাংলায় বোঝানো", "প্রতিটি তারিখ ও অঙ্ক যাচাই"],
     noneVerified: "কোনো কথা যাচাই করা যায়নি।",
+    tampered: "পরীক্ষা: Chithi নিজেই ব্যাখ্যার একটি অঙ্ক ইচ্ছে করে ভুল করেছে। দেখুন, যাচাই সেটি ধরে আলাদা করে রেখেছে।",
+    tamperBtn: "যাচাই পরীক্ষা করুন: একটি অঙ্ক ইচ্ছে করে বদলে দিন",
     privacy: "ছবি Meta-র মডেলে পাঠানো হয়, এবং Meta তা তাদের পরিষেবা উন্নত করতে ব্যবহার করতে পারে। নাম, ঠিকানা আর অ্যাকাউন্ট নম্বর ঢেকে ছবি তুলুন।",
   },
   hi: {
@@ -25,6 +27,8 @@ const T = {
     footer: "Chithi क़ानूनी सलाह नहीं देता। शक हो तो चिट्ठी भेजने वाले से संपर्क करें।",
     steps: ["फ़ोटो में चिट्ठी ढूँढना (SAM 3.1)", "ज़रूरी हिस्से ढूँढना (SAM 3.1)", "चिट्ठी पढ़ना (Muse Spark)", "दोबारा पढ़ना, पास से", "हिन्दी में समझाना", "हर तारीख़ और रकम की जाँच"],
     noneVerified: "कोई बात जाँची नहीं जा सकी।",
+    tampered: "जाँच की परीक्षा: Chithi ने समझाने में एक रकम जानबूझकर बदली है। देखिए, जाँच ने उसे पकड़कर अलग रख दिया।",
+    tamperBtn: "जाँच को परखें: एक रकम जानबूझकर बदलें",
     privacy: "फ़ोटो Meta के मॉडल को भेजी जाती है, और Meta उसे अपनी सेवा सुधारने में इस्तेमाल कर सकता है। नाम, पता और खाता नंबर ढककर फ़ोटो लें।",
   },
   en: {
@@ -38,13 +42,31 @@ const T = {
     footer: "Chithi doesn't give legal advice. If in doubt, contact whoever sent the letter.",
     steps: ["Finding the letter in the photo (SAM 3.1)", "Finding the parts that matter (SAM 3.1)", "Reading the letter (Muse Spark)", "Reading it again, up close", "Explaining it in English", "Checking every date and amount"],
     noneVerified: "Nothing could be verified.",
+    tampered: "Test mode: Chithi changed one amount in the explanation on purpose. The check caught it and held it back.",
+    tamperBtn: "Test the check: change one amount on purpose",
     privacy: "The photo is sent to Meta's models, and Meta may use it to improve its service. Cover your name, address and account numbers before you take it.",
   },
 };
+// Why a point was held back, in the reader's language. {x} is the value.
+const REASONS = {
+  bn: { quote_not_found: "যে কথাগুলো উদ্ধৃত করা হয়েছে, সেগুলো চিঠিতে নেই।", date_not_in_quote: "{x} তারিখটি চিঠির উদ্ধৃত অংশে নেই।",
+        number_not_in_quote: "{x} অঙ্কটি চিঠির উদ্ধৃত অংশে নেই।", date_not_in_second_reading: "ছবিটি আবার পড়ে {x} তারিখটি পাওয়া যায়নি।",
+        number_not_in_second_reading: "ছবিটি আবার পড়ে {x} অঙ্কটি পাওয়া যায়নি।" },
+  hi: { quote_not_found: "जो शब्द उद्धृत किए गए, वे चिट्ठी में नहीं हैं।", date_not_in_quote: "तारीख़ {x} चिट्ठी के उद्धृत हिस्से में नहीं है।",
+        number_not_in_quote: "रकम {x} चिट्ठी के उद्धृत हिस्से में नहीं है।", date_not_in_second_reading: "फ़ोटो दोबारा पढ़ने पर तारीख़ {x} नहीं मिली।",
+        number_not_in_second_reading: "फ़ोटो दोबारा पढ़ने पर रकम {x} नहीं मिली।" },
+};
+function reasonText(code, fallback) {
+  const [c, x] = [code.split(":")[0], code.split(":").slice(1).join(":")];
+  const t = REASONS[lang]?.[c];
+  return t ? t.replace("{x}", x) : fallback;
+}
+
 const KIND = { electricity_bill: "Electricity bill", bank_notice: "Bank notice", tax_notice: "Tax notice", property_tax_notice: "Property tax (Hindi)" };
 
 let lang = "bn";
 let current = null; // the last result
+let lastSample = null; // the sample letter on screen, if any
 const $ = (id) => document.getElementById(id);
 
 function applyLang() {
@@ -109,7 +131,7 @@ function esc(s) {
 function card(p, cy) {
   const evidence = p.evidence || p.quote;
   const quote = esc(evidence).replace(/(₹\s?|Rs\.?\s?|INR\s?)?[\d০-৯०-९][\d০-৯०-९,./\-]*(\s?\/-)?/g, (m) => `<b>${m}</b>`);
-  const why = cy && p.reasons_text?.length ? `<p class="why">${p.reasons_text.map(esc).join(" ")}</p>` : "";
+  const why = cy && p.reasons?.length ? `<p class="why">${p.reasons.map((r, i) => esc(reasonText(r, p.reasons_text[i]))).join(" ")}</p>` : "";
   return `<div class="card ${cy ? "cy" : ""}"><p class="say">${esc(p.say)}</p>
     <p class="quote">${T[lang].fromLetter} “${quote}”</p>${why}</div>`;
 }
@@ -136,6 +158,8 @@ function render(d, photoUrl) {
   $("letterText").textContent = d.letter_text;
   $("answers").innerHTML = "";
   $("askBox").hidden = d.backend === "mock";
+  $("tampered").hidden = !d.tampered;
+  $("tamperBtn").hidden = !lastSample || d.tampered;
   show("result");
 }
 
@@ -144,11 +168,19 @@ $("photo").addEventListener("change", (e) => {
   if (!f) return;
   const form = new FormData();
   form.append("photo", f);
+  lastSample = null;
   explain(form, URL.createObjectURL(f));
   e.target.value = "";
 });
 
 $("again").addEventListener("click", () => show("start"));
+
+$("tamperBtn").addEventListener("click", () => {
+  const form = new FormData();
+  form.append("sample_id", lastSample.id);
+  form.append("tamper", "true");
+  explain(form, lastSample.photo);
+});
 
 async function loadSamples() {
   const [health, samples] = await Promise.all([fetch("/api/health").then((r) => r.json()), fetch("/api/samples").then((r) => r.json())]);
@@ -161,6 +193,7 @@ async function loadSamples() {
   document.querySelectorAll(".sample").forEach((b) => b.addEventListener("click", () => {
     const form = new FormData();
     form.append("sample_id", b.dataset.id);
+    lastSample = { id: b.dataset.id, photo: b.dataset.photo };
     explain(form, b.dataset.photo);
   }));
 }

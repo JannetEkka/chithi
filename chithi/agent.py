@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 
 from PIL import Image, ImageOps
 
-from . import meta, prompts, verify
+from . import meta, prompts, values, verify
 
 # Short noun phrases for SAM 3.1: one concept per request.
 PAGE_CONCEPT = os.environ.get("CHITHI_PAGE_CONCEPT", "sheet of paper")
@@ -60,6 +60,7 @@ class Result:
     trace: list[dict] = field(default_factory=list)
     cost_usd: float = 0.0
     seconds: float = 0.0
+    tampered: bool = False
 
     def to_dict(self) -> dict:
         return self.__dict__.copy()
@@ -141,7 +142,22 @@ def _zoom(img: Image.Image, min_width: int = 1400) -> Image.Image:
     return img.resize((min_width, int(img.height * s)), Image.LANCZOS)
 
 
-def run(photo: bytes, language: str, backend, *, repair: bool = True) -> Result:
+def tamper_one(points: list[verify.Point]) -> tuple[str, str] | None:
+    """Test mode: change one digit of one amount in the explanation, the kind
+    of slip a model makes, so the check can be seen catching it."""
+    for p in points:
+        for f in values.find_values(p.say):
+            if f.kind == "number" and any(ch.isdigit() for ch in f.text[1:]):
+                digits = [i for i, ch in enumerate(f.text) if ch.isdigit()]
+                i = digits[1] if len(digits) > 1 else digits[0]
+                old = f.text
+                new = old[:i] + str((int(old[i]) + 3) % 10) + old[i + 1:]
+                p.say = p.say.replace(old, new, 1)
+                return old, new
+    return None
+
+
+def run(photo: bytes, language: str, backend, *, repair: bool = True, tamper: bool = False) -> Result:
     res = Result(language=language)
     began = time.time()
     tr = Trace(res, billable=backend.name != "mock")
@@ -214,6 +230,12 @@ def run(photo: bytes, language: str, backend, *, repair: bool = True) -> Result:
     res.kind, res.summary = out.get("kind", ""), out.get("summary", "")
     points = [verify.Point(f"p{i + 1}", p["say"], p["quote"]) for i, p in enumerate(out.get("points", []))]
     topics = {f"p{i + 1}": p.get("topic", "other") for i, p in enumerate(out.get("points", []))}
+
+    if tamper:
+        changed = tamper_one(points)
+        tr.step("tamper", "test mode", f"changed {changed[0]} to {changed[1]} on purpose" if changed else "no amount to change", time.time())
+        res.tampered = bool(changed)
+        repair = False  # show the catch itself, not the fix
 
     # 6. Check every point.
     t = time.time()

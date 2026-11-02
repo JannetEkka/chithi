@@ -84,7 +84,7 @@ def samples():
 
 
 @app.post("/api/explain")
-async def explain(request: Request, language: str = Form("bn"), sample_id: str = Form(""),
+async def explain(request: Request, language: str = Form("bn"), sample_id: str = Form(""), tamper: bool = Form(False),
                   photo: UploadFile | None = File(None)):
     if language not in prompts.LANGUAGES:
         raise HTTPException(400, "language must be bn, hi or en")
@@ -99,8 +99,11 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
     else:
         raise HTTPException(400, "Send a photo or pick a sample letter")
 
-    if live() and sample_id and (sample_id, language) in _sample_cache:
-        return {**_sample_cache[(sample_id, language)], "cached": True}
+    if tamper and not sample_id:
+        raise HTTPException(400, "Test mode works on the sample letters only")
+    key = (sample_id, language, tamper)
+    if live() and sample_id and key in _sample_cache:
+        return {**_sample_cache[key], "cached": True}
     if live():
         _spend(request)
         backend = agent.LiveBackend(_explainer())
@@ -110,13 +113,13 @@ async def explain(request: Request, language: str = Form("bn"), sample_id: str =
         raise HTTPException(503, "Live models aren't switched on yet; try a sample letter.")
     try:
         # The models take 15-30 s; keep the server free for other requests meanwhile.
-        res = await run_in_threadpool(agent.run, image, language, backend)
+        res = await run_in_threadpool(lambda: agent.run(image, language, backend, tamper=tamper))
     except meta.MetaError as e:
         raise HTTPException(502, f"A Meta model call failed: {e}") from e
     out = res.to_dict()
     out["backend"] = backend.name
     if sample_id and backend.name == "live":
-        _sample_cache[(sample_id, language)] = out
+        _sample_cache[key] = out
     return out
 
 

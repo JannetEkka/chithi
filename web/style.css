@@ -19,6 +19,7 @@
   }
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--paper); color: var(--ink);
@@ -98,3 +99,5 @@ pre { white-space: pre-wrap; font-size: 13px; max-height: 360px; overflow: auto;
 footer { max-width: 760px; margin: 0 auto; padding: 16px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
 footer a { color: inherit; }
 .small { font-size: 12px; }
+.tampered { background: var(--cy-bg); color: var(--cy); border-radius: 10px; padding: 10px 12px; font-size: 15px; margin: 16px 0 0; }
+.tamper-btn { display: block; width: 100%; margin-top: 16px; padding: 12px; font: inherit; font-size: 15px; border-radius: 12px; border: 1px dashed var(--cy); background: none; color: var(--cy); cursor: pointer; }
